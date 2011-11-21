@@ -1,0 +1,6 @@
+bin
+build
+*.swp
+*.o
+testing/model_load/main
+data/shaders/compile_test/compileshader

@@ -1,0 +1,12 @@
+Puck Dimensions
+
+radius = 1.00000
+height = 0.20000
+center at (0, 0.15, 0)
+
+Paddle Dimensions
+radius = 1.00000
+height = 1.45
+center at (0.0, 0.825, 0.0)
+
+Note: The centers mean the bottom of both the puck and paddle sit on the Y=0.1 plane (hover slightly above table) 
