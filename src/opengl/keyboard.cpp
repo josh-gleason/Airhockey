@@ -297,7 +297,7 @@ void keyboardUp( unsigned char key, int x, int y )
       /*    Quit Program    */
       /**********************/
       case 033: //escape key
-         exit( EXIT_SUCCESS );     
+         exit( EXIT_SUCCESS );
    }
 
 }
