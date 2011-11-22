@@ -11,20 +11,37 @@ void timerHandle( int state ){
    options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
    vec3 motion;
 
+   static bool p1flag = false;
+   static bool p2flag = false;
 
-
+   /**************************************************/
+   /*         Check if the puck has scored           */
+   /**************************************************/
    /*    Check to make sure that the puck has not passed  */
    /*    through the board and does not need to be reset  */
    vec3 puck_pos = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
 
    if( puck_pos.x > 3.5 || puck_pos.x < -3.5 ){
-      if( puck_pos.x > 3.5 ){
-         options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
-      }
-      else{
-         options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
-      }
+      vec3 position = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
       
+      //move puck
+      if( puck_pos.x > 3.5 && p2flag == false){
+         options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
+         options.p2_score++;
+         p2flag = true;
+      }
+      else if( puck_pos.x > 3.5 && p2flag == true){
+         p2flag = false;
+      }
+      else if (puck_pos.x <-3.5 && p1flag == false){
+         options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
+         options.p1_score++;
+         p1flag = true;
+      }
+      else if( puck_pos.x > 3.5 && p1flag == true){
+         p1flag = false;
+      }
+
       options.physics.paddle1RigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-3, 0, 0)));
       options.physics.paddle2RigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 3, 0, 0)));
 
@@ -34,7 +51,7 @@ void timerHandle( int state ){
       /*     Start Puck     */
       //get an update of the motion state
       options.physics.puckRigidBody->getMotionState()->getWorldTransform( options.physics.puck_trans );
-      
+
       //load new position into structure for paddle1 model
       motion = vec3( options.physics.paddle1_trans.getOrigin().getX(), options.physics.paddle1_trans.getOrigin().getY(), options.physics.paddle1_trans.getOrigin().getZ());
 
@@ -202,20 +219,6 @@ void timerHandle( int state ){
       }
       /////////////////////////////////////////////////////////////////////////////
 
-      /**************************************************/
-      /*         Check if the puck has scored           */
-      /**************************************************/
-      vec3 position = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
-      if (position.x > 3.05 && position.x < 3.5 ){
-         if(position.z > -0.2 && position.z < 0.2 ){
-            options.p2_score++;
-         }
-      }
-      if (position.x < -3.05 && position.x > -3.5 ){
-         if(position.z > -0.2 && position.z < 0.2 ){
-            options.p1_score++;
-         }
-      }
    }
    glutPostRedisplay(); 
    glutTimerFunc( 17, &timerHandle, 0);
