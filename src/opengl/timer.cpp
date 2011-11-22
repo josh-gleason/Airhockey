@@ -62,18 +62,21 @@ void timerHandle( int state ){
       btScalar f_xVal = (pos_f.getX()-pos_i.getX())*mass/t/t;
       btScalar f_zVal = (pos_f.getZ()-pos_i.getZ())*mass/t/t;
 
-      // compute what the velocity will be
-      btVector3 vel_new = btVector3(f_xVal * t / mass, 0.0, f_zVal * t / mass);
-      btScalar vel_newMag = sqrt(vel_new.getX()*vel_new.getX()+vel_new.getZ()*vel_new.getZ());
-      
-      // if the new velocity is greater, scale the force by the ratio
-      // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
-      //       and I know its zero because I just set it to zero :D
-      if ( vel_newMag > options.pdl_maxVelocity )
+      if ( options.pdl_maxVelocity > 0 )
       {
-         // scale down the force to limit the velocity
-         f_xVal = f_xVal / vel_newMag * options.pdl_maxVelocity;
-         f_zVal = f_zVal / vel_newMag * options.pdl_maxVelocity;
+         // compute what the velocity will be
+         btVector3 vel_new = btVector3(f_xVal * t / mass, 0.0, f_zVal * t / mass);
+         btScalar vel_newMag = sqrt(vel_new.getX()*vel_new.getX()+vel_new.getZ()*vel_new.getZ());
+         
+         // if the new velocity is greater, scale the force by the ratio
+         // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
+         //       and I know its zero because I just set it to zero :D
+         if ( vel_newMag > options.pdl_maxVelocity )
+         {
+            // scale down the force to limit the velocity
+            f_xVal = f_xVal / vel_newMag * options.pdl_maxVelocity;
+            f_zVal = f_zVal / vel_newMag * options.pdl_maxVelocity;
+         }
       }
 
       // apply a force to the paddle
@@ -111,18 +114,21 @@ void timerHandle( int state ){
       btScalar f_xVal = (pos_f.getX()-pos_i.getX())*mass/t/t;
       btScalar f_zVal = (pos_f.getZ()-pos_i.getZ())*mass/t/t;
 
-      // compute what the velocity will be
-      btVector3 vel_new = btVector3(f_xVal * t / mass, 0.0, f_zVal * t / mass);
-      btScalar vel_newMag = sqrt(vel_new.getX()*vel_new.getX()+vel_new.getZ()*vel_new.getZ());
-      
-      // if the new velocity is greater, scale the force by the ratio
-      // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
-      //       and I know its zero because I just set it to zero :D
-      if ( vel_newMag > options.pdl_maxVelocity )
+      if ( options.pdl_maxVelocity > 0 )
       {
-         // scale down the force to limit the velocity
-         f_xVal = f_xVal / vel_newMag * options.pdl_maxVelocity;
-         f_zVal = f_zVal / vel_newMag * options.pdl_maxVelocity;
+         // compute what the velocity will be
+         btVector3 vel_new = btVector3(f_xVal * t / mass, 0.0, f_zVal * t / mass);
+         btScalar vel_newMag = sqrt(vel_new.getX()*vel_new.getX()+vel_new.getZ()*vel_new.getZ());
+         
+         // if the new velocity is greater, scale the force by the ratio
+         // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
+         //       and I know its zero because I just set it to zero :D
+         if ( vel_newMag > options.pdl_maxVelocity )
+         {
+            // scale down the force to limit the velocity
+            f_xVal = f_xVal / vel_newMag * options.pdl_maxVelocity;
+            f_zVal = f_zVal / vel_newMag * options.pdl_maxVelocity;
+         }
       }
 
       // apply a force to the paddle
@@ -145,7 +151,6 @@ void timerHandle( int state ){
          options.p1_score++;
       }
    }
-
 
    glutPostRedisplay(); 
    glutTimerFunc( 17, &timerHandle, 0);

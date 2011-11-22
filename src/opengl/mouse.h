@@ -4,10 +4,11 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "../math/vector.h"
-#include "../structures/Parameters.h"
+// ../math/
+#include "vector.h"
 
-using namespace std;
+// ../structures
+#include "Parameters.h"
 
 extern Parameters options;
 

@@ -308,22 +308,10 @@ void paddleTimer(int value){
    if( paction.move_z != 0 )
       options.paddle1_dest += vec2(0.0,paction.move_z*options.pdl_moveStep);
    
-   /*if( paction.move_x != 0 ){
-      int dir = paction.move_x/fabs(paction.move_x);
-      options.physics.paddle1RigidBody->translate(btVector3( dir*0.05, 0.0, 0.0));
-   }
-   if( paction.move_z != 0 ){
-      int dir = paction.move_z/fabs(paction.move_z);
-      options.physics.paddle1RigidBody->translate(btVector3( 0.0, 0.0, dir*0.05));
-   }*/
-
    if ( paction.keysPressed > 0 )
       glutTimerFunc( options.pdl_timerStep, paddleTimer, value);
-  
-   glutPostRedisplay();
 
-   std::cout << options.paddle1_dest << " " << paction.move_x << ", " << paction.move_z << std::endl;
-
+   // no redisplay here anymore becuase the moving happens in the physics timer
 }
 
 void special_keys( int key, int x, int y ){
@@ -359,7 +347,6 @@ void special_keys( int key, int x, int y ){
       if ( paction.keysPressed == 1 )
          glutTimerFunc(20, paddleTimer, 0);
    }
-
 }
 
 void special_Upkeys( int key, int x, int y ){

@@ -42,12 +42,6 @@ void display_function( void )
    glPopMatrix();
 
    
-   
-   
-   
-   
-   
-   
    options.puck->draw_shape(    options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
    options.paddle1->draw_shape( options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
    options.paddle2->draw_shape( options.camera.getTransform(), options.projectionMatrix, options.light.m_position);

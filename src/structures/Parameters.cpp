@@ -21,11 +21,12 @@ Parameters::Parameters( ){
    cam_moveStep = 0.05;
    cam_timerStep = 10;
 
-   pdl_moveStep = 0.1;
+   // 0.15 might be a little fast lol
+   pdl_moveStep = 0.15;
    pdl_timerStep = 17;  // ~60 Hz
 
    // in units/sec (this is the to restrict the mouse movement to the
-   // speed of the paddle)
+   // speed of the paddle) negative value disables maximum
    pdl_maxVelocity = sqrt(pdl_moveStep*pdl_moveStep*7200.);
 
    mouse_down = false;
