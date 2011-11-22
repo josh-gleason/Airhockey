@@ -11,9 +11,8 @@ void timerHandle( int state ){
    options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
    vec3 motion;
 
-   // what are these for? -Josh
-   static bool p1flag = false;
-   static bool p2flag = false;
+   // because timer needs an extra frame to reset after reseting paddle
+   static bool waitflag = false;
 
    /**************************************************/
    /*         Check if the puck has scored           */
@@ -22,7 +21,7 @@ void timerHandle( int state ){
    /*    through the board and does not need to be reset  */
    vec3 puck_pos = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
 
-   static bool p1scored = false, p2scored = false, ob = false;
+   bool p1scored = false, p2scored = false, ob = false;
 
    // first check if scoreing is possible
    
@@ -39,31 +38,28 @@ void timerHandle( int state ){
       ob = true;
    }
 
-   if ( p1scored || p2scored || ob )
+   if ( !waitflag && (p1scored || p2scored || ob) )
    {
       vec3 position = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
       
       //set puck position (and add scores)
-      if ( p2scored ) //&& !p2flag )
+      if ( p2scored )
       {
+         std::cout << "PLAYER 2 SCORED" << std::endl;
          options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
          options.p2_score++;
-         p2flag = true;
+         waitflag = true;
       }
-      //else if( p2scored && p2flag){
-      //   p2flag = false;
-      //}
-      else if ( p1scored ) //&& !p1flag )
+      else if ( p1scored )
       {
+         std::cout << "PLAYER 1 SCORED" << std::endl;
          options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
          options.p1_score++;
-         p1flag = true;
+         waitflag = true;
       }
-      //else if( p1scored && p1flag ){
-      //   p1flag = false;
-      //}
       else if ( ob )
       {
+         std::cout << "OB" << std::endl;
          options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(0, 0, 0)));
       }
       
@@ -115,10 +111,9 @@ void timerHandle( int state ){
       options.physics.puckRigidBody->setLinearVelocity(  btVector3(0.0,0.0,0.0));
       options.physics.puckRigidBody->setAngularVelocity( btVector3(0.0,0.0,0.0));
 
-
-
    }
    else{ // puck in play
+      waitflag = false;
 
       //keep constant upward force on puck and paddles
       btVector3 force = btVector3(0,0.5,0);
