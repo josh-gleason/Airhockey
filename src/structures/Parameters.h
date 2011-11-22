@@ -118,6 +118,7 @@ class Parameters{
       GLfloat pdl_moveStep;
       GLfloat pdl_timerStep;
       btScalar pdl_maxVelocity;
+      bool pdl_high_quality_model;
 
       // the destination that the paddles attempt to move to in (x,z) coords
       vec2 paddle1_dest;

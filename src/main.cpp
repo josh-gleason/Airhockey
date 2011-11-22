@@ -59,9 +59,9 @@ void init()
    options.cam_lookStep = 1.0;
    options.cam_moveStep = 0.06;
 
-   options.camera = Camera(vec4(5.0,2.0,5.0,1.0), options.cam_mode);
-   options.camera.rotateHoriz(43.8);
-   options.camera.rotateVert(-14);
+   options.camera = Camera(vec4(8.0,5.0,0.0,1.0), options.cam_mode);
+   options.camera.rotateHoriz(90);
+   options.camera.rotateVert(-35);
 
    // set up initial light position
    options.light_timerStep = 10;
@@ -80,11 +80,16 @@ void init()
    options.board = new Object("data/models/Airhockey.obj", 0.5, options.program);
    Object walls("data/models/walls.obj", 0.5, options.program);   // for physics
    options.puck = new Object("data/models/Puck.obj", 0.2, options.program);
-   options.paddle1 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
-   options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   if ( options.pdl_high_quality_model ) {
+      options.paddle1 = new Object("data/models/Paddle.obj", 0.2, options.program);
+      options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   } else {
+      options.paddle1 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
+      options.paddle2 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
+   }
 
    options.board->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
-   walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);//, false );  // dont load shader
+   walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false );  // dont load shader
    options.puck->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    options.paddle1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    options.paddle2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);

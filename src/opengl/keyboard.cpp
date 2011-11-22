@@ -322,22 +322,22 @@ void special_keys( int key, int x, int y ){
 
    switch( key ){
       case GLUT_KEY_UP:
-         paction.move_x++;
-         paction.keysPressed++;
-         paddleKeyPressed = true;
-         break;
-      case GLUT_KEY_DOWN:
          paction.move_x--;
          paction.keysPressed++;
          paddleKeyPressed = true;
          break;
+      case GLUT_KEY_DOWN:
+         paction.move_x++;
+         paction.keysPressed++;
+         paddleKeyPressed = true;
+         break;
       case GLUT_KEY_LEFT:
-         paction.move_z--;
+         paction.move_z++;
          paction.keysPressed++;
          paddleKeyPressed = true;
          break;
       case GLUT_KEY_RIGHT:
-         paction.move_z++;
+         paction.move_z--;
          paction.keysPressed++;
          paddleKeyPressed = true;
          break;
@@ -355,19 +355,19 @@ void special_Upkeys( int key, int x, int y ){
    switch( key ){
 
       case GLUT_KEY_UP:
-         paction.move_x--;
-         paction.keysPressed--;
-         break;
-      case GLUT_KEY_DOWN:
          paction.move_x++;
          paction.keysPressed--;
          break;
+      case GLUT_KEY_DOWN:
+         paction.move_x--;
+         paction.keysPressed--;
+         break;
       case GLUT_KEY_LEFT:
-         paction.move_z++;
+         paction.move_z--;
          paction.keysPressed--;
          break;
       case GLUT_KEY_RIGHT:
-         paction.move_z--;
+         paction.move_z++;
          paction.keysPressed--;
          break;
    }

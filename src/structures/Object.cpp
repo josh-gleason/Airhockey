@@ -44,8 +44,6 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
    //load data from model
    model_data.load(model_name.c_str());
 
-   std::cout << model_name.c_str() << " " << model_data.vertexCount << std::endl;
-  
    //load model sizes
    vertex_count = model_data.faceCount*3;
    

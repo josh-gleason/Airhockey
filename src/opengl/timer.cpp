@@ -10,7 +10,7 @@ void timerHandle( int state ){
    vec3 motion;
 
    //step simulation
-   options.physics.dynamicsWorld->stepSimulation(1.f/60.f);
+   options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
    
    //keep constant upward force on puck and paddles
    btVector3 force = btVector3(0,0.5,0);
