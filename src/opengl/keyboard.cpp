@@ -294,9 +294,9 @@ void keyboardUp( unsigned char key, int x, int y )
 
 void paddleTimer(int value){
    if( paction.move_x != 0 )
-      options.paddle1_dest += vec2(paction.move_x*options.pdl_moveStep,0.0);
+      options.set_paddle1_dest(options.paddle1_dest + vec2(paction.move_x*options.pdl_moveStep,0.0));
    if( paction.move_z != 0 )
-      options.paddle1_dest += vec2(0.0,paction.move_z*options.pdl_moveStep);
+      options.set_paddle1_dest(options.paddle1_dest + vec2(0.0,paction.move_z*options.pdl_moveStep));
    
    if ( paction.keysPressed > 0 )
       glutTimerFunc( options.pdl_timerStep, paddleTimer, value);

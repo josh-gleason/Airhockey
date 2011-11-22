@@ -62,6 +62,30 @@ void Parameters::construct_objects( ){
    //box.init( program );
 }
 
+void Parameters::set_paddle1_dest(vec2 dest){
+   // simple bounding rectangle (hard coded)
+   dest.x = max(-3.1188105f,dest.x);
+   dest.x = min(-0.2f,dest.x);
+
+   // actually z
+   dest.y = min(1.749742f,dest.y);
+   dest.y = max(-1.749742f,dest.y);
+
+   paddle1_dest = dest;
+}
+
+void Parameters::set_paddle2_dest(vec2 dest){
+   // simple bounding rectangle (hard coded)
+   dest.x = min(3.1188105f,dest.x);
+   dest.x = max(0.2f,dest.x);
+
+   // actually z
+   dest.y = min(1.749742f,dest.y);
+   dest.y = max(-1.749742f,dest.y);
+
+   paddle2_dest = dest;
+}
+
 void Parameters::rotate(  ){
 
    double dist = vdistance( tcenter, eye);

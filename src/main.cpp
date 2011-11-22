@@ -97,8 +97,8 @@ void init()
    //set initial object positions
    options.paddle1->adjust_translation( vec3(-3.0, 0.0, 0.0));
    options.paddle2->adjust_translation( vec3( 3.0, 0.0, 0.0));
-   options.paddle1_dest = vec2(-3.0, 0.0); // (x,z) coords
-   options.paddle2_dest = vec2(3.0, 0.0);  // (x,z) coords
+   options.set_paddle1_dest(vec2(-3.0, 0.0)); // (x,z) coords
+   options.set_paddle2_dest(vec2(3.0, 0.0));  // (x,z) coords
 	
    /*********************************************/
    /*             Physics Engine                */

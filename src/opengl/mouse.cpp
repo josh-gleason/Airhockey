@@ -84,7 +84,7 @@ void mouseEvent(int button, int state, int x, int y)
    //Get the current mouse position in world coordinates
    vec3 world_points = window2world( x, y);
    
-   options.paddle2_dest = vec2(world_points.x,world_points.z);
+   options.set_paddle2_dest(vec2(world_points.x,world_points.z));
 }
 
 /**
@@ -97,6 +97,6 @@ void mouseMove(int x, int y)
    //Get the current mouse position in world coordinates
    vec4 world_points = window2world( x, y);
    
-   options.paddle2_dest = vec2(world_points.x,world_points.z);
+   options.set_paddle2_dest(vec2(world_points.x,world_points.z));
 }
 

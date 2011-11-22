@@ -124,6 +124,9 @@ class Parameters{
       vec2 paddle1_dest;
       vec2 paddle2_dest;
 
+      void set_paddle1_dest(vec2 dest);
+      void set_paddle2_dest(vec2 dest);
+
       Camera camera;
       Light light;
       Physics_Model physics;
