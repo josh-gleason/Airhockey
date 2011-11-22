@@ -69,6 +69,17 @@ class Physics_Model{
       btDefaultMotionState* paddle1MotionState;
       btDefaultMotionState* paddle2MotionState;
 
+      btScalar board_friction;
+      btScalar board_restitution;
+
+      btScalar pdl_mass;
+      btScalar pdl_friction;
+      btScalar pdl_restitution;
+      
+      btScalar puck_mass;
+      btScalar puck_friction;
+      btScalar puck_restitution;
+
       int shift_z_pos1;
       int shift_z_neg1;
       int shift_z_pos2;

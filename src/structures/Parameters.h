@@ -42,6 +42,7 @@ using namespace std;
 class Parameters{
 
    public:
+
       /**
         * Parameter Constructor
         * 
@@ -113,6 +114,13 @@ class Parameters{
       Object* paddle1;
       Object* paddle2;
       Object* puck;
+
+      GLfloat pdl_moveStep;
+      GLfloat pdl_timerStep;
+
+      // the destination that the paddles attempt to move to in (x,z) coords
+      vec2 paddle1_dest;
+      vec2 paddle2_dest;
 
       Camera camera;
       Light light;

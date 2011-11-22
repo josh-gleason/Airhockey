@@ -12,6 +12,17 @@ Physics_Model::Physics_Model(){
    shift_z_neg2 = 0;
 
    action = 0;
+
+   puck_mass = 5.0;
+   puck_friction = 0.00;
+   puck_restitution = 0.7;
+
+   pdl_mass = 15.0;
+   pdl_friction = 0.01;
+   pdl_restitution = 0.7;
+
+   board_friction = 0.01;
+   board_restitution = 0.5;
 }
 
 void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 const& paddle1Size, vec2 const& paddle2Size, 
@@ -73,8 +84,9 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    boardMotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1),btVector3( 0, -0.1,0)));
 
    btRigidBody::btRigidBodyConstructionInfo boardRigidBodyCI( 0, boardMotionState, boardShape, btVector3(0,0,0));
-   boardRigidBodyCI.m_friction = 0.01;     //this is the friction of its surfaces
-   
+   boardRigidBodyCI.m_friction = board_friction;     //this is the friction of its surfaces
+   boardRigidBodyCI.m_restitution = board_restitution;     //this is the "bouncyness"
+
    boardRigidBody = new btRigidBody( boardRigidBodyCI);
 
    dynamicsWorld->addRigidBody( boardRigidBody );
@@ -88,13 +100,12 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    //build motion state (PUCK)
    puckMotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( 0,0.0,0)));
 
-   btScalar puck_mass = 5;
    btVector3 puckInertia(0,0,0);
    puckShape->calculateLocalInertia( puck_mass, puckInertia);
 
    btRigidBody::btRigidBodyConstructionInfo puckRigidBodyCI( puck_mass, puckMotionState, puckShape, puckInertia);
-   puckRigidBodyCI.m_friction = 0.00;     //this is the friction of its surfaces
-   puckRigidBodyCI.m_restitution = 0.8;   //this is the "bounciness"
+   puckRigidBodyCI.m_friction = puck_friction;        //this is the friction of its surfaces
+   puckRigidBodyCI.m_restitution = puck_restitution;  //this is the "bounciness"
 
    puckRigidBody = new btRigidBody( puckRigidBodyCI );
    dynamicsWorld->addRigidBody( puckRigidBody );
@@ -111,14 +122,13 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    //build motion state (PADDLE1)
    paddle1MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle1Cent.x,0.0, paddle1Cent.z)));
 
-   btScalar paddle1_mass = 15;
    btVector3 paddle1Inertia(0,0,0);
-   paddle1Shape->calculateLocalInertia( paddle1_mass, paddle1Inertia);
+   paddle1Shape->calculateLocalInertia( pdl_mass, paddle1Inertia);
 
-   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI( paddle1_mass, paddle1MotionState, paddle1Shape, paddle1Inertia);
+   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI( pdl_mass, paddle1MotionState, paddle1Shape, paddle1Inertia);
    paddle1RigidBody = new btRigidBody( paddle1RigidBodyCI );
-   paddle1RigidBodyCI.m_friction = 0.00;     //this is the friction of its surfaces
-   paddle1RigidBodyCI.m_restitution = 0.8;   //this is the "bounciness"
+   paddle1RigidBodyCI.m_friction = pdl_friction;        //this is the friction of its surfaces
+   paddle1RigidBodyCI.m_restitution = pdl_restitution;  //this is the "bounciness"
    
    dynamicsWorld->addRigidBody( paddle1RigidBody );
 
@@ -134,14 +144,13 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    //build motion state (PADDLE2)
    paddle2MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle2Cent.x,0.0, paddle2Cent.z)));
 
-   btScalar paddle2_mass = 15;
    btVector3 paddle2Inertia(0,0,0);
-   paddle2Shape->calculateLocalInertia( paddle2_mass, paddle2Inertia);
+   paddle2Shape->calculateLocalInertia( pdl_mass, paddle2Inertia);
 
-   btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI( paddle2_mass, paddle2MotionState, paddle2Shape, paddle2Inertia);
+   btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI( pdl_mass, paddle2MotionState, paddle2Shape, paddle2Inertia);
    paddle2RigidBody = new btRigidBody( paddle2RigidBodyCI );
-   paddle2RigidBodyCI.m_friction = 0.00;     //this is the friction of its surfaces
-   paddle2RigidBodyCI.m_restitution = 0.8;   //this is the "bounciness"
+   paddle2RigidBodyCI.m_friction = pdl_friction;       //this is the friction of its surfaces
+   paddle2RigidBodyCI.m_restitution = pdl_restitution; //this is the "bounciness"
    
    dynamicsWorld->addRigidBody( paddle2RigidBody );
 

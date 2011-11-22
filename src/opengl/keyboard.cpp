@@ -222,7 +222,6 @@ void keyboardUp( unsigned char key, int x, int y )
    /** Process for the key */
    switch( key ){
       
-      
       /********************************/
       /*         Light Actions        */
       /********************************/
@@ -304,19 +303,26 @@ void keyboardUp( unsigned char key, int x, int y )
 }
 
 void paddleTimer(int value){
+   if( paction.move_x != 0 )
+      options.paddle1_dest += vec2(paction.move_x*options.pdl_moveStep,0.0);
+   if( paction.move_z != 0 )
+      options.paddle1_dest += vec2(0.0,paction.move_z*options.pdl_moveStep);
    
-   if( paction.move_x != 0 ){
+   /*if( paction.move_x != 0 ){
       int dir = paction.move_x/fabs(paction.move_x);
       options.physics.paddle1RigidBody->translate(btVector3( dir*0.05, 0.0, 0.0));
    }
    if( paction.move_z != 0 ){
       int dir = paction.move_z/fabs(paction.move_z);
       options.physics.paddle1RigidBody->translate(btVector3( 0.0, 0.0, dir*0.05));
-   }
+   }*/
+
    if ( paction.keysPressed > 0 )
-      glutTimerFunc( 20, paddleTimer, value);
-   
+      glutTimerFunc( options.pdl_timerStep, paddleTimer, value);
+  
    glutPostRedisplay();
+
+   std::cout << options.paddle1_dest << " " << paction.move_x << ", " << paction.move_z << std::endl;
 
 }
 
@@ -328,12 +334,12 @@ void special_keys( int key, int x, int y ){
 
    switch( key ){
       case GLUT_KEY_UP:
-         paction.move_x--;
+         paction.move_x++;
          paction.keysPressed++;
          paddleKeyPressed = true;
          break;
       case GLUT_KEY_DOWN:
-         paction.move_x++;
+         paction.move_x--;
          paction.keysPressed++;
          paddleKeyPressed = true;
          break;
@@ -361,19 +367,19 @@ void special_Upkeys( int key, int x, int y ){
    /** Process for the key */
    switch( key ){
 
-      case GLUT_KEY_UP: //move light -z
-         paction.move_x++;
-         paction.keysPressed--;
-         break;
-      case GLUT_KEY_DOWN: //move light +z
+      case GLUT_KEY_UP:
          paction.move_x--;
          paction.keysPressed--;
          break;
-      case GLUT_KEY_LEFT: //move light -x
+      case GLUT_KEY_DOWN:
+         paction.move_x++;
+         paction.keysPressed--;
+         break;
+      case GLUT_KEY_LEFT:
          paction.move_z++;
          paction.keysPressed--;
          break;
-      case GLUT_KEY_RIGHT: //move light +x
+      case GLUT_KEY_RIGHT:
          paction.move_z--;
          paction.keysPressed--;
          break;

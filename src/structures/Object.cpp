@@ -38,11 +38,13 @@ void Object::make_empty(){
 }
 
 
-void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_diff, const vec4& l_spec){
+void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_diff, const vec4& l_spec, bool load_shader){
 
 
    //load data from model
    model_data.load(model_name.c_str());
+
+   std::cout << model_name.c_str() << " " << model_data.vertexCount << std::endl;
   
    //load model sizes
    vertex_count = model_data.faceCount*3;
@@ -103,6 +105,9 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
                      (y_max-y_min)/2.0+y_min,
                      (z_max-z_min)/2.0+z_min);
 
+   // in case we just want to read the model file
+   if ( !load_shader )
+      return;
 
    /// Initialize Shader
    // Create a vertex array object

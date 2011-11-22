@@ -21,6 +21,9 @@ Parameters::Parameters( ){
    cam_moveStep = 0.05;
    cam_timerStep = 10;
 
+   pdl_moveStep = 0.05;
+   pdl_timerStep = 10;
+
    mouse_down = false;
 
    projectionMatrix = Perspective(fova, ratio, zNear, zFar);

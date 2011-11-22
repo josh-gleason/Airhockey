@@ -38,7 +38,6 @@ Parameters options;
 // OpenGL initialization
 void init()
 {
-
    // enable anti-aliasing (and transparency)
    glEnable(GL_LINE_SMOOTH);
    glEnable(GL_POLYGON_SMOOTH);
@@ -79,11 +78,13 @@ void init()
    //initialize Air Hockey Board
 
    options.board = new Object("data/models/Airhockey.obj", 0.5, options.program);
+   Object walls("data/models/walls.obj", 0.5, options.program);   // for physics
    options.puck = new Object("data/models/Puck.obj", 0.2, options.program);
    options.paddle1 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
    options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
 
    options.board->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
+   walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);//, false );  // dont load shader
    options.puck->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    options.paddle1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    options.paddle2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
@@ -91,6 +92,8 @@ void init()
    //set initial object positions
    options.paddle1->adjust_translation( vec3(-3.0, 0.0, 0.0));
    options.paddle2->adjust_translation( vec3( 3.0, 0.0, 0.0));
+   options.paddle1_dest = vec2(-3.0, 0.0); // (x,z) coords
+   options.paddle2_dest = vec2(3.0, 0.0);  // (x,z) coords
 	
    /*********************************************/
    /*             Physics Engine                */
@@ -114,9 +117,10 @@ void init()
    vec3 puckCent    = options.puck->get_centroid();
    vec3 paddle1Cent = options.paddle1->get_centroid();
    vec3 paddle2Cent = options.paddle2->get_centroid();
+
    options.physics.init( boardSize, puckSize, paddle1Size, paddle2Size, 
                          boardCent, puckCent, paddle1Cent, paddle2Cent,
-                         options.board->get_vertices(),  options.board->num_verts(),
+                         walls.get_vertices(),  walls.num_verts(),
                          options.puck->get_vertices(),   options.puck->num_verts(),
                          options.paddle1->get_vertices(), options.paddle1->num_verts());
 
