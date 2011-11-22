@@ -100,16 +100,6 @@ void keyboardPress( unsigned char key, int x, int y ){
 
    switch( key ){
       
-      case '4':
-         force = btVector3(50,0,0);
-         options.physics.puckRigidBody->applyCentralForce(force);
-         break;
-      /*
-      case '5':
-         distance = btVector3( 0.1,0,.1);
-         options.physics.paddle1RigidBody->translate(distance);
-         break;
-         */
       /********************************/
       /*         Light Actions        */
       /********************************/
