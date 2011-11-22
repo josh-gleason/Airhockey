@@ -11,6 +11,7 @@ void timerHandle( int state ){
    options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
    vec3 motion;
 
+   // what are these for? -Josh
    static bool p1flag = false;
    static bool p2flag = false;
 
@@ -21,32 +22,56 @@ void timerHandle( int state ){
    /*    through the board and does not need to be reset  */
    vec3 puck_pos = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
 
-   if( puck_pos.x > 3.5 || puck_pos.x < -3.5 ){
+   static bool p1scored = false, p2scored = false, ob = false;
+
+   // first check if scoreing is possible
+   
+   if ( puck_pos.z > 1.949742 || puck_pos.z < -1.949742 ) { // ob
+      ob = true;
+   }
+   else if ( puck_pos.z < 0.374856f && puck_pos.z > -0.374856f ) {  // scoring possible
+      if ( puck_pos.x > 3.625 )
+         p1scored = true;
+      else if ( puck_pos.x < -3.625 )
+         p2scored = true;
+   }
+   else if ( puck_pos.x > 3.625 || puck_pos.x < -3.625 ) {  // ob
+      ob = true;
+   }
+
+   if ( p1scored || p2scored || ob )
+   {
       vec3 position = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
       
-      //move puck
-      if( puck_pos.x > 3.5 && p2flag == false){
+      //set puck position (and add scores)
+      if ( p2scored ) //&& !p2flag )
+      {
          options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
          options.p2_score++;
          p2flag = true;
       }
-      else if( puck_pos.x > 3.5 && p2flag == true){
-         p2flag = false;
-      }
-      else if (puck_pos.x <-3.5 && p1flag == false){
+      //else if( p2scored && p2flag){
+      //   p2flag = false;
+      //}
+      else if ( p1scored ) //&& !p1flag )
+      {
          options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
          options.p1_score++;
          p1flag = true;
       }
-      else if( puck_pos.x > 3.5 && p1flag == true){
-         p1flag = false;
+      //else if( p1scored && p1flag ){
+      //   p1flag = false;
+      //}
+      else if ( ob )
+      {
+         options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(0, 0, 0)));
       }
-
+      
       options.physics.paddle1RigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-3, 0, 0)));
       options.physics.paddle2RigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 3, 0, 0)));
-
-      options.paddle1_dest = vec2(-3.0, 0.0);
-      options.paddle2_dest = vec2( 3.0, 0.0);
+      
+      options.set_paddle1_dest(vec2(-3.0, 0.0));
+      options.set_paddle2_dest(vec2( 3.0, 0.0));
 
       /*     Start Puck     */
       //get an update of the motion state
@@ -56,7 +81,7 @@ void timerHandle( int state ){
       motion = vec3( options.physics.paddle1_trans.getOrigin().getX(), options.physics.paddle1_trans.getOrigin().getY(), options.physics.paddle1_trans.getOrigin().getZ());
 
       //push new position into paddle1
-      options.paddle1->set_translation( motion );
+      options.puck->set_translation( motion );
       /*   End puck    */
 
       /*    Start paddle 1    */
@@ -80,7 +105,7 @@ void timerHandle( int state ){
       options.paddle2->set_translation( motion );
       /*    End paddle 2   */
 
-
+      // reset velocities
       options.physics.paddle1RigidBody->setLinearVelocity(  btVector3(0.0,0.0,0.0));
       options.physics.paddle1RigidBody->setAngularVelocity( btVector3(0.0,0.0,0.0));
 
@@ -90,9 +115,10 @@ void timerHandle( int state ){
       options.physics.puckRigidBody->setLinearVelocity(  btVector3(0.0,0.0,0.0));
       options.physics.puckRigidBody->setAngularVelocity( btVector3(0.0,0.0,0.0));
 
-   }
-   else{
 
+
+   }
+   else{ // puck in play
 
       //keep constant upward force on puck and paddles
       btVector3 force = btVector3(0,0.5,0);
