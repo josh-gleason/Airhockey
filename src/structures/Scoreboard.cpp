@@ -91,7 +91,6 @@ void Scoreboard::init( const GLuint& prog ){
    //read image from file
    img_data = read_image( "data/characters_flip.ppm" );
    
-   cout << "Image Size: " << img_cols << ", " << img_rows << endl;
    /*********************************/
    /*       High Score Banner       */
    /*********************************/
@@ -100,11 +99,8 @@ void Scoreboard::init( const GLuint& prog ){
    tex_coords_main = NULL;
    vec4 tl_tex(-0.75, 0.3, 0, 1);
    vec4 br_tex( 0.75,-0.3, 0, 1);
-   build_texture_values( tl_tex, br_tex, string("A"), points_main, tex_coords_main, vex_size_main, tex_size_main);
+   build_texture_values( tl_tex, br_tex, string("HIGH SCORES"), points_main, tex_coords_main, vex_size_main, tex_size_main);
   
-   for(int i=0; i<6; i++)
-      cout << points_main[i] << ", " << tex_coords_main[i] << endl;
-   
    num_points_main = tex_size_main/sizeof(vec2);
    
    // Initialize texture objects
@@ -131,9 +127,6 @@ void Scoreboard::init( const GLuint& prog ){
    //activate single texture
    glActiveTexture( GL_TEXTURE0 );
 
-   // Create a vertex array object
-   GLuint vao;
-   
    // generate and bind the vao
    #ifdef __APPLE__
    glGenVertexArraysAPPLE( 1, &vao );
