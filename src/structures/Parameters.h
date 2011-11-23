@@ -22,6 +22,7 @@
 #include "Physics.h"
 #include "Scoreboard.h"
 #include "HUD.h"
+#include "Winner.h"
 
 // ../math/
 #include "vector.h"
@@ -157,6 +158,8 @@ class Parameters{
       Physics_Model physics;
       unsigned int light_timerStep;
       GLfloat light_moveStep;
+      Winner* winner;
+
 
       int glut_window_x;
       int glut_window_y;

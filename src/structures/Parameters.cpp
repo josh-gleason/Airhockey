@@ -2,6 +2,7 @@
 
 Parameters::Parameters( ){
 
+   winner = NULL;
    //Mouse anchor set to zero
    //mouse_anchor = 0;
    eye    = vec4( 0.0, 0.0, -1.0, 1.0 );

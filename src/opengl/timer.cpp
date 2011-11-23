@@ -7,7 +7,7 @@
 
 void timerHandle( int state ){
 
-   if( options.view_mode != 1 ){
+   if( options.view_mode == 0 ){
       //step simulation
       options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
       vec3 motion;
@@ -225,6 +225,11 @@ void timerHandle( int state ){
             options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
             options.p2_score++;
             options.hud.p2_score(options.p2_score);
+            if( options.p2_score > 3 ){
+               options.view_mode = 2;
+               options.winner = new Winner;
+               options.winner->init( options.program, true);
+            }
          }
          else if ( p1scored )
          {
@@ -232,6 +237,12 @@ void timerHandle( int state ){
             options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
             options.p1_score++;
             options.hud.p1_score(options.p1_score);
+            
+            if( options.p1_score > 3 ){
+               options.view_mode = 2;
+               options.winner = new Winner;
+               options.winner->init( options.program, false);
+            }
          }
          else if ( ob )
          {

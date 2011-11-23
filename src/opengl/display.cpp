@@ -58,6 +58,11 @@ void display_function( void )
 
 
    }
+   else if( options.view_mode == 2 ){
+
+      glClearColor( 1.0, 1.0, 1.0, 1.0);
+      options.winner->draw_shape();
+   }
 
    glutSwapBuffers();
 

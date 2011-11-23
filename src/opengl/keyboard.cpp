@@ -97,6 +97,13 @@ void keyboardPress( unsigned char key, int x, int y ){
    bool lightKeyPressed  = false;
    btVector3 force = btVector3(0,5,0);
    btVector3 distance;
+   
+   if( options.view_mode == 2 ){
+      options.view_mode = 0;
+      options.hud.p1_score(0);
+      options.hud.p2_score(0);
+      delete options.winner;
+   }
 
    switch( key ){
       
