@@ -32,10 +32,15 @@ void main()
 {
    if( drawmode != 2 ){
       // build the "model to world" transformation matrix (no rotation or scale right now)
-      mat4 modelworld = mat4( 1.0, 0.0, 0.0, 0.0,
+      mat4 modelworld =
+      mat4( 1.0, 0.0, 0.0, 0.0,
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
-            translation.x, translation.y, translation.z, 1.0);
+            translation.x, translation.y, translation.z, 1.0) *
+      mat4( cos(rotation), 0.0, -sin(rotation), 0.0,
+            0.0,           1.0, 0.0,            0.0,
+            sin(rotation), 0.0, cos(rotation),  0.0,
+            0.0,           0.0, 0.0,            1.0);
 
       // put vertex into world coordinates
       gl_Position = modelworld * vPosition;

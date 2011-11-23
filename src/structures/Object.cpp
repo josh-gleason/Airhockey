@@ -15,6 +15,7 @@ Object::Object( const string& fname, const double& sf, const GLuint prog ){
    diffuses = NULL;
    speculars= NULL;
    shininess= NULL;
+
 }
 
 Object::~Object(){
@@ -170,6 +171,7 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
    rotation_id = glGetUniformLocation( program, "rotation" );
 
    translation = vec4(0,0,0,1);
+   rotation = 0.0;
 }
 
 void Object::draw_shape( mat4 const& worldviewMat, mat4 const& proj, vec4 const& l_pos ){
@@ -182,6 +184,7 @@ void Object::draw_shape( mat4 const& worldviewMat, mat4 const& proj, vec4 const&
 #endif
    
    glUniform4fv( translation_id, 1, translation );
+   glUniform1f( rotation_id, rotation );
    glUniform4fv( light_position,   1, l_pos );
    glUniformMatrix4fv( projection, 1, GL_TRUE, proj );
    glUniformMatrix4fv( worldview, 1, GL_TRUE, worldviewMat);
@@ -300,7 +303,19 @@ void Object::adjust_translation( const vec3& motion ){
    translation.y += motion.y;
    translation.z += motion.z;
 }
-      
+
+void Object::adjust_rotation( GLfloat radians ){
+   rotation += radians;
+}
+
+void Object::set_rotation( GLfloat rot ){
+   rotation = rot;
+}
+
+GLfloat Object::get_rotation(){
+   return rotation;
+}
+
 vec3 Object::get_translation()const{
    return vec3( translation.x, translation.y, translation.z);
 }
