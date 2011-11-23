@@ -21,6 +21,7 @@
 #include "Light.h"
 #include "Physics.h"
 #include "Scoreboard.h"
+#include "HUD.h"
 
 // ../math/
 #include "vector.h"
@@ -145,7 +146,11 @@ class Parameters{
 
       void set_paddle1_dest(vec2 dest);
       void set_paddle2_dest(vec2 dest);
+      
+      string p1name;
+      string p2name;
 
+      HUD hud;
       Scoreboard scoreboard;
       Camera camera;
       Light light;
