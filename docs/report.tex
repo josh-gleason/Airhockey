@@ -186,13 +186,26 @@ effects of light and shadows. Figure \ref{fig:light} shows various light positio
 \clearpage
 \section*{Technical Manual}
 \subsection*{Design Decisions}
-
+This project required some new and very interesting design decisions with respect to the last project.
 \begin{description}
-\item[something]
+\item[Model Loader] We incorporated a model loader from Kixor to load and display models. We had to significantly
+                   modify it, however it works and we were able to create a generic object loader which will
+                   work for every type of model we use. 
+\item[Text Engine] We built our own tool for loading text into our opengl program. We load an image with every
+character and then use indeces to fix the locations of each letter. Then, given a string, we create a list of
+texture locations and vertex locations which will allow OpenGL to render the text. This required a thorough 
+understanding of textures and was a great learning experience. 
+
+\item[Physics Engine] We used the Bullet physics engine to handle the collision detection and response. This
+took an enormous amount of time, however it creates a very good physics environment. Our paddles respond 
+accordingly to any shape and respond well to friction and "bounciness".
 \end{description}
 
 \subsection*{Deficiencies}
+This project meets all requirements and does not have any major known bugs.
 
 \subsection*{Areas for Improvement}
+We had issues getting arbitrary shaped paddles to work, which was annoying. This is something we would like to
+fix so that given any object, we can use it as a paddle.  Another area for improvement is 
 
 \end{document}
