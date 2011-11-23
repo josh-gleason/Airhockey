@@ -1,7 +1,6 @@
-# Blender MTL File: 'Paddle.blend'
-# Material Count: 1
+# Blender MTL File: 'walls.blend'
+# Material Count: 0
 newmtl Material
-Ns 15.686275
 Ka 0.337732 0.000000 0.000000
 Kd 0.337732 0.000000 0.000000
 Ks 0.200787 0.200787 0.200787
@@ -9,5 +8,3 @@ Ni 1.000000
 d 1.000000
 Ns 100
 illum 2
-
-
