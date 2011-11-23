@@ -14,15 +14,15 @@ Physics_Model::Physics_Model(){
    action = 0;
 
    puck_mass = 5.0;
-   puck_friction = 0.01;
-   puck_restitution = 0.9;
+   puck_friction = 0.5;
+   puck_restitution = 0.8;
 
    pdl_mass = 15.0;
-   pdl_friction = 0.01;
-   pdl_restitution = 0.9;
+   pdl_friction = 0.05;
+   pdl_restitution = 0.8;
 
-   board_friction = 0.01;
-   board_restitution = 0.9;
+   board_friction = 0.5;
+   board_restitution = 0.8;
 }
 
 void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 const& paddle1Size, vec2 const& paddle2Size, 
@@ -51,7 +51,6 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
 
    ///set value of gravity
    dynamicsWorld->setGravity(btVector3(0,-10,0));
-
 
    /******************************************/
    /*                   Board                */
@@ -113,6 +112,28 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    puckRigidBody->setActivationState(DISABLE_DEACTIVATION);
    puckRigidBody->setLinearFactor(btVector3(1,0,1));
 
+   {
+      btTransform frameInB = btTransform::getIdentity();
+      frameInB.setOrigin(btVector3(0.0,0.0,0.0));
+
+      btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *puckRigidBody,frameInB, true );
+
+      // lowerlimit = upperlimit --> axis locked
+      // lowerlimit < upperlimit --> motion limited between values
+      // lowerlimit > upperlimit --> axis is free
+
+      // lock the Y axis movement
+      XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+      XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+
+      // lock the X, Z, rotations
+      XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+      XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+
+      dynamicsWorld->addConstraint(XZplaneConstraint);
+      XZplaneConstraint->setDbgDrawSize(btScalar(5.f));
+   }
+
    /******************************************/
    /*                  Paddle1               */
    /******************************************/
@@ -141,6 +162,29 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
 
    paddle1RigidBody->setActivationState(DISABLE_DEACTIVATION);
    paddle1RigidBody->setLinearFactor(btVector3(1,0,1));
+   
+   {
+      btTransform frameInB = btTransform::getIdentity();
+      frameInB.setOrigin(btVector3(0.0,0.0,0.0));
+
+      btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *paddle1RigidBody,frameInB, true );
+
+      // lowerlimit = upperlimit --> axis locked
+      // lowerlimit < upperlimit --> motion limited between values
+      // lowerlimit > upperlimit --> axis is free
+
+      // lock the Y axis movement
+      XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+      XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+
+      // lock the X, Z, rotations
+      XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+      XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+
+      dynamicsWorld->addConstraint(XZplaneConstraint);
+      XZplaneConstraint->setDbgDrawSize(btScalar(5.f));
+   }
+
 
    /******************************************/
    /*                  Paddle2               */
@@ -173,6 +217,29 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
 
    paddle2RigidBody->setActivationState(DISABLE_DEACTIVATION);
    paddle2RigidBody->setLinearFactor(btVector3(1,0,1));
+   
+   {
+      btTransform frameInB = btTransform::getIdentity();
+      frameInB.setOrigin(btVector3(0.0,0.0,0.0));
+
+      btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *paddle2RigidBody,frameInB, true );
+
+      // lowerlimit = upperlimit --> axis locked
+      // lowerlimit < upperlimit --> motion limited between values
+      // lowerlimit > upperlimit --> axis is free
+
+      // lock the Y axis movement
+      XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+      XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+
+      // lock the X, Z, rotations
+      XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+      XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+
+      dynamicsWorld->addConstraint(XZplaneConstraint);
+      XZplaneConstraint->setDbgDrawSize(btScalar(5.f));
+   }
+
 
 }
 
