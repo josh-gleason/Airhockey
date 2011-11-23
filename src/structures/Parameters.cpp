@@ -33,7 +33,7 @@ Parameters::Parameters( ){
    // 0.4 - hard
    // 0.5 - insane
    // > 0.5 - impossible
-   ai_difficulty = 0.2;
+   ai_difficulty = 0.3;
 
    pdl1_maxVelocity = sqrt(pdl_moveStep*pdl_moveStep*7200.);
    pdl2_maxVelocity = sqrt(pdl_moveStep*pdl_moveStep*7200.);

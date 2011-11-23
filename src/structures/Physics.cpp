@@ -23,6 +23,61 @@ Physics_Model::Physics_Model(){
 
    board_friction = 0.5;
    board_restitution = 0.9;
+   
+   boardShape = NULL;
+   puckShape = NULL;
+   paddle1Shape = NULL;
+   paddle2Shape = NULL;
+   paddle1Circle = NULL;
+   paddle1Circle = NULL;
+   paddle1Circle = NULL;
+   paddle1Circle = NULL;
+   paddle1Circle = NULL;
+   paddle1Circle = NULL;
+   puckRigidBody = NULL;
+   boardRigidBody = NULL;
+   paddle1RigidBody = NULL;
+   paddle2RigidBody = NULL;
+   collisionConfiguration = NULL;
+   dispatcher = NULL;
+   overlappingPairCache = NULL;
+   solver = NULL;
+   boardMotionState = NULL;
+   puckMotionState = NULL;
+   paddle1MotionState = NULL;
+   paddle2MotionState = NULL;
+   dynamicsWorld = NULL;
+}
+
+Physics_Model::~Physics_Model()
+{
+   if ( boardShape ) delete boardShape;
+   if ( puckShape )  delete puckShape;
+   //  delete [] paddle1Shape;   // these are pointers to other memory
+   //  delete [] paddle2Shape;
+   if ( paddle1Circle )  delete paddle1Circle;
+   if ( paddle2Circle )  delete paddle2Circle;
+   if ( paddle1Square)   delete paddle1Square;
+   if ( paddle2Square)   delete paddle2Square;
+   if ( paddle1Triangle) delete paddle1Triangle;
+   if ( paddle2Triangle) delete paddle2Triangle;
+
+   if ( puckRigidBody ) delete puckRigidBody;
+   if ( boardRigidBody ) delete boardRigidBody;
+   if ( paddle1RigidBody ) delete paddle1RigidBody;
+   if ( paddle2RigidBody ) delete paddle2RigidBody;
+
+   if ( collisionConfiguration ) delete collisionConfiguration;
+   if ( dispatcher ) delete dispatcher;
+   if ( overlappingPairCache ) delete overlappingPairCache;
+   if ( solver ) delete solver;
+   
+   if ( boardMotionState ) delete boardMotionState;
+   if ( puckMotionState ) delete puckMotionState;
+   if ( paddle1MotionState ) delete paddle1MotionState;
+   if ( paddle2MotionState ) delete paddle2MotionState;
+   
+   // deleting dynamics world breaks things
 }
 
 void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 const& paddle1Size, vec2 const& paddle2Size, 
@@ -187,9 +242,6 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    /******************************************/
    /*                  Paddle2               */
    /******************************************/
-   ///build paddle2 collision model
-   paddle2Shape = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
-   
    ///build paddle2 collision model
    paddle2Circle = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
 
