@@ -6,6 +6,7 @@
 #include "GL.h"
 
 #include <fstream>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -86,6 +87,24 @@ class Scoreboard{
       GLuint tex_size_main;      //size of texture array (BANNER ONLY) 
       vec4 * points_main;        //list of vertices (BANNER ONLY)
       vec2 * tex_coords_main;    //list of texture coordinates (BANNER ONLY)
+      
+      GLuint num_points_p1;
+      GLuint vex_size_p1;      //size of vertex array (PLAYER 1)
+      GLuint tex_size_p1;      //size of texture array (PLAYER 1) 
+      vec4 * points_p1;        //list of vertices (PLAYER 1)
+      vec2 * tex_coords_p1;    //list of texture coordinates (PLAYER 1)
+      
+      GLuint num_points_p2;
+      GLuint vex_size_p2;      //size of vertex array (PLAYER 2)
+      GLuint tex_size_p2;      //size of texture array (PLAYER 2) 
+      vec4 * points_p2;        //list of vertices (PLAYER 2)
+      vec2 * tex_coords_p2;    //list of texture coordinates (PLAYER 2)
+      
+      GLuint num_points_p3;
+      GLuint vex_size_p3;      //size of vertex array (BANNER ONLY)
+      GLuint tex_size_p3;      //size of texture array (PLAYER 1) 
+      vec4 * points_p3;        //list of vertices (PLAYER 3)
+      vec2 * tex_coords_p3;    //list of texture coordinates (PLAYER 3)
       
       GLfloat z_dist;
       float z_trans;
