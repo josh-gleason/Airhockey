@@ -65,6 +65,7 @@ class Object{
       GLuint projection;
       GLuint light_position;
       GLuint drawmode;
+      GLuint rotation_id;
 
       string model_name;
       objLoader model_data;
@@ -81,6 +82,7 @@ class Object{
       GLfloat* shininess;
 
       vec4 translation;
+      GLfloat rotation
       vec4 velocity;
 
       // no need for scaleing or rotation

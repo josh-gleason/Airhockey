@@ -14,6 +14,7 @@ uniform mat4 worldview;
 
 uniform mat4 projection; 
 uniform vec4 translation;
+uniform float rotation;
 uniform vec4 light_position;
 uniform  int drawmode;
 

@@ -167,6 +167,7 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
    light_position = glGetUniformLocation( program, "light_position");
    drawmode = glGetUniformLocation( program, "drawmode");
    translation_id = glGetUniformLocation( program, "translation");
+   rotation_id = glGetUniformLocation( program, "rotation" );
 
    translation = vec4(0,0,0,1);
 }
