@@ -146,6 +146,7 @@ class Parameters{
       // player 1 is the AI player right now
       bool ai_enabled;
       float ai_aggressive;
+      float ai_difficulty;
 };
 
 #endif

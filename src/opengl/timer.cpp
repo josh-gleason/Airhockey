@@ -70,6 +70,7 @@ void timerHandle( int state ){
          // if the new velocity is greater, scale the force by the ratio
          // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
          //       and I know its zero because I just set it to zero :D
+
          if ( vel_newMag > options.pdl1_maxVelocity )
          {
             // scale down the force to limit the velocity
@@ -147,16 +148,16 @@ void timerHandle( int state ){
 
    // first check if scoreing is possible
    
-   if ( puck_pos.z > 1.949742 || puck_pos.z < -1.949742 ) { // ob
+   if ( puck_pos.z > 2.2 || puck_pos.z < -2.2 ) { // ob
       ob = true;
    }
    else if ( puck_pos.z < 0.374856f && puck_pos.z > -0.374856f ) {  // scoring possible
-      if ( puck_pos.x > 3.625 )
+      if ( puck_pos.x > 4 )
          p1scored = true;
-      else if ( puck_pos.x < -3.625 )
+      else if ( puck_pos.x < -4 )
          p2scored = true;
    }
-   else if ( puck_pos.x > 3.625 || puck_pos.x < -3.625 ) {  // ob
+   else if ( puck_pos.x > 4 || puck_pos.x < -4 ) {  // ob
       ob = true;
    }
 

@@ -8,6 +8,7 @@ Object::Object( const string& fname, const double& sf, const GLuint prog ){
    program  = prog;
    scale_factor = sf;
    model_name = fname;
+   velocity = vec4(0.0,0.0,0.0,1.0);
    vertices = NULL;
    normals  = NULL;
    ambients = NULL;
@@ -284,17 +285,24 @@ void Object::build_arrays( const vec4& lpos, const vec4& l_amb, const vec4& l_di
       
 void Object::adjust_translation( const vec3& motion ){
 
+   velocity = vec4(motion.x,motion.y,motion.z,1.0);
+   
    translation.x += motion.x;
    translation.y += motion.y;
    translation.z += motion.z;
-
 }
       
 vec3 Object::get_translation()const{
    return vec3( translation.x, translation.y, translation.z);
 }
 
+const vec4& Object::get_velocity() const{
+   return velocity;
+}
+
 void Object::set_translation( const vec3& trans ){
+   velocity = vec4(trans.x,trans.y,trans.z,0.0) - translation;
+   
    translation.x = trans.x;
    translation.y = trans.y;
    translation.z = trans.z;

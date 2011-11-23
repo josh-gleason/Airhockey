@@ -68,7 +68,6 @@ void init()
    options.light_timerStep = 10;
    options.light_moveStep = 0.06;
 
-
    // Load shaders and use the resulting shader program
    options.program = InitShader( "data/shaders/vshader.glsl", "data/shaders/fshader.glsl" );
    glUseProgram( options.program );

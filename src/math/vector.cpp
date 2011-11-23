@@ -9,7 +9,7 @@ vec2::vec2( GLfloat xx, GLfloat yy ){
    x = xx;
    y = yy;
 }
-      
+
 vec2::vec2( const vec2& v ){
    x = v.x;  
    y = v.y;  
