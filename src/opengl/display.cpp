@@ -92,7 +92,7 @@ void init_menu( ){
    options.shape_submenu = glutCreateMenu( &processShapeMenuEvents);
    glutAddMenuEntry("Round",0);
    glutAddMenuEntry("Square",1);
-   glutAddMenuEntry("Wedge",2);
+   //glutAddMenuEntry("Wedge",2); // TODO
 
    /*
    options.ai_submenu = glutCreateMenu( &processAIMenuEvents);
