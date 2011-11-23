@@ -50,7 +50,10 @@ void aiTimer(int value)
       if ( stuck_frames > 10 )
       {
          // apply this force for 15 frames to the puck
-         appliedForce = btVector3(50,0.0,rand()%50-25.0);
+         if ( puck_pos.y > 0 )
+            appliedForce = btVector3(50.0,0.0,100.0);
+         else
+            appliedForce = btVector3(50.0,0.0,-100.0);
          move_frames = 15; // move away for 15 frames
       }
    }
