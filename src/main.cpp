@@ -136,6 +136,15 @@ void init()
 
 
    enableAI();
+   /***************************************/
+   /*          Texture Mapping            */
+   /***************************************/
+   // Load shaders and use the resulting shader program
+   options.texture_program = InitShader( "data/shaders/vshader_texture.glsl", "data/shaders/fshader_texture.glsl" );
+
+   // build scoreboard
+   options.scoreboard.init( options.texture_program );
+
 }
 
 //----------------------------------------------------------------------------
