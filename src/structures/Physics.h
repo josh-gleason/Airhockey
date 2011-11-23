@@ -4,7 +4,11 @@
 // bullet physics engine
 #include <btBulletDynamicsCommon.h>
 
+// Was trying to use this for triangle paddle
+//#include <bullet/BulletCollision/Gimpact/btGImpactShape.h>
+
 #include "vector.h"
+#include "Object.h"
 
 class Physics_Model{
    
@@ -17,18 +21,21 @@ class Physics_Model{
                  vec4 const* board_points,  const size_t num_boardPoints,      
                  vec4 const* puck_points,   const size_t num_puckPoints,      
                  vec4 const* paddle_points, const size_t num_paddlePoints);      
-      
+
+      Object* tri1_walls;
+      Object* tri2_walls;
+
       btCollisionShape* boardShape;
       btCollisionShape* puckShape;
       btCollisionShape* paddle1Shape;
       btCollisionShape* paddle2Shape;
 
-      btCylinderShape* paddle1Circle;
-      btCylinderShape* paddle2Circle;
-      btBoxShape* paddle1Square;
-      btBoxShape* paddle2Square;
-      btCylinderShape* paddle1Triangle;   // TODO change type
-      btCylinderShape* paddle2Triangle;
+      btCollisionShape* paddle1Circle;
+      btCollisionShape* paddle2Circle;
+      btCollisionShape* paddle1Square;
+      btCollisionShape* paddle2Square;
+      btCollisionShape* paddle1Triangle;
+      btCollisionShape* paddle2Triangle;
 
       btRigidBody* puckRigidBody;
       btRigidBody* boardRigidBody;

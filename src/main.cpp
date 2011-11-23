@@ -84,10 +84,14 @@ void init()
    options.puck = new Object("data/models/Puck.obj", 0.2, options.program);
    options.round1 = new Object("data/models/Paddle.obj", 0.2, options.program);
    options.round2 = new Object("data/models/Paddle.obj", 0.2, options.program);
-   options.tri1 = new Object("data/models/Paddle_Triangle2.obj", 0.2, options.program);
-   options.tri2 = new Object("data/models/Paddle_Triangle2.obj", 0.2, options.program);
+   options.tri1 = new Object("data/models/Paddle_Triangle.obj", 0.2, options.program);
+   options.tri2 = new Object("data/models/Paddle_Triangle.obj", 0.2, options.program);
    options.sqr1 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
    options.sqr2 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
+
+   // for more physics
+   options.physics.tri1_walls = new Object("data/models/Triangle1_walls.mtl", 0.2, options.program);
+   options.physics.tri2_walls = new Object("data/models/Triangle1_walls.mtl", 0.2, options.program);
 
    // these need to reference something to start but have to be "set" after physics
    options.paddle1 = options.round1;
@@ -102,6 +106,9 @@ void init()
    options.tri2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    options.sqr1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular); // rotate 180 deg
    options.sqr2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
+   
+   options.physics.tri1_walls->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false, 180.0 ); // rotate 180 deg & dont load shader
+   options.physics.tri2_walls->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false, 180.0 ); // rotate 180 deg & dont ...
 
    //set initial object positions
    options.paddle1->adjust_translation( vec3(-3.0, 0.0, 0.0));

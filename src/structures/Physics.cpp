@@ -24,6 +24,9 @@ Physics_Model::Physics_Model(){
    board_friction = 0.5;
    board_restitution = 0.9;
    
+   tri1_walls = NULL;
+   tri2_walls = NULL;
+
    boardShape = NULL;
    puckShape = NULL;
    paddle1Shape = NULL;
@@ -54,6 +57,9 @@ Physics_Model::Physics_Model(){
 
 Physics_Model::~Physics_Model()
 {
+   if ( tri1_walls ) delete tri1_walls;
+   if ( tri2_walls ) delete tri2_walls;
+
    if ( boardShape ) delete boardShape;
    if ( puckShape )  delete puckShape;
    //  delete [] paddle1Shape;   // these are pointers to other memory
@@ -201,12 +207,37 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    ///build paddle1 collision model
    paddle1Circle = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
 
-   // TODO
-   //paddle1Triangle = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
-
    paddle1Square = new btBoxShape(btVector3(btScalar(paddle1Size.x), btScalar(0.1), btScalar(paddle1Size.x)));
 
-   paddle1Shape = paddle1Square;
+/////////////////////////////
+   /*
+   size_t num_pts_tri1 = tri1_walls->num_verts();
+   vec4* vertices1 = tri1_walls->get_vertices();
+
+   btTriangleMesh *mTriMesh_pdl1 = new btTriangleMesh();
+
+   vec3 pt0, pt1, pt2;
+   for(size_t i=0; i<num_pts_tri1; i+=3){
+
+      pt0 = vec3( vertices1[i+0].x, vertices1[i+0].y, vertices1[i+0].z );
+      pt1 = vec3( vertices1[i+1].x, vertices1[i+1].y, vertices1[i+1].z );
+      pt2 = vec3( vertices1[i+2].x, vertices1[i+2].y, vertices1[i+2].z );
+
+      // For whatever your source of triangles is
+      //   give the three points of each triangle:
+      btVector3 v0(pt0.x,pt0.y,pt0.z);
+      btVector3 v1(pt1.x,pt1.y,pt1.z);
+      btVector3 v2(pt2.x,pt2.y,pt2.z);
+
+      // Then add the triangle to the mesh:
+      mTriMesh_pdl1->addTriangle(v0,v1,v2);
+   }
+
+   paddle1Triangle = new btGImpactMeshShape(mTriMesh_pdl1);
+   */
+////////////////////////////////
+
+   paddle1Shape = paddle1Circle;
 
    //build motion state (PADDLE1)
    paddle1MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle1Cent.x,0.0, paddle1Cent.z)));
@@ -252,12 +283,37 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    ///build paddle2 collision model
    paddle2Circle = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
 
-   // TODO
-   //paddle2Triangle = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
-
    paddle2Square = new btBoxShape(btVector3(btScalar(paddle2Size.x), btScalar(0.1), btScalar(paddle2Size.x)));
 
-   paddle2Shape = paddle2Square;
+//////////////////////////////////////////////////////////////////
+   /* 
+   size_t num_pts_tri2 = tri2_walls->num_verts();
+   vec4* vertices2 = tri2_walls->get_vertices();
+
+   btTriangleMesh *mTriMesh_pdl2 = new btTriangleMesh();
+
+   vec3 pt0_2, pt1_2, pt2_2;
+   for(size_t i=0; i<num_pts_tri2; i+=3){
+
+      pt0_2 = vec3( vertices2[i+0].x, vertices2[i+0].y, vertices2[i+0].z );
+      pt1_2 = vec3( vertices2[i+1].x, vertices2[i+1].y, vertices2[i+1].z );
+      pt2_2 = vec3( vertices2[i+2].x, vertices2[i+2].y, vertices2[i+2].z );
+
+      // For whatever your source of triangles is
+      //   give the three points of each triangle:
+      btVector3 v0(pt0_2.x,pt0_2.y,pt0_2.z);
+      btVector3 v1(pt1_2.x,pt1_2.y,pt1_2.z);
+      btVector3 v2(pt2_2.x,pt2_2.y,pt2_2.z);
+
+      // Then add the triangle to the mesh:
+      mTriMesh_pdl2->addTriangle(v0,v1,v2);
+   }
+
+   paddle2Triangle = new btGImpactMeshShape(mTriMesh_pdl2);
+   */
+//////////////////////////////////////////////////////////////////
+
+   paddle2Shape = paddle2Circle;
 
    //build motion state (PADDLE2)
    paddle2MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle2Cent.x,0.0, paddle2Cent.z)));
