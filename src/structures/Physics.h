@@ -11,7 +11,7 @@ class Physics_Model{
    public:
       
       Physics_Model();
-      
+      ~Physics_Model(); 
       void init( vec3 const& boardSize, vec2 const& puckSize, vec2 const& paddle1Size, vec2 const& paddle2Size, 
                  vec3 const& boardCent, vec3 const& puckCent, vec3 const& paddle1Cent, vec3 const& paddle2Cent,
                  vec4 const* board_points,  const size_t num_boardPoints,      
@@ -23,12 +23,12 @@ class Physics_Model{
       btCollisionShape* paddle1Shape;
       btCollisionShape* paddle2Shape;
 
-      btCollisionShape* paddle1Circle;
-      btCollisionShape* paddle1Triangle;
-      btCollisionShape* paddle1Square;
-      btCollisionShape* paddle2Circle;
-      btCollisionShape* paddle2Triangle;
-      btCollisionShape* paddle2Square;
+      btCylinderShape* paddle1Circle;
+      btCylinderShape* paddle2Circle;
+      btBoxShape* paddle1Square;
+      btBoxShape* paddle2Square;
+      btCylinderShape* paddle1Triangle;   // TODO change type
+      btCylinderShape* paddle2Triangle;
 
       btRigidBody* puckRigidBody;
       btRigidBody* boardRigidBody;
@@ -59,17 +59,6 @@ class Physics_Model{
       ///the default constraint solver. 
       btSequentialImpulseConstraintSolver* solver;
 
-      ///create collision shapes
-      btAlignedObjectArray<btCollisionShape*> collisionShapes;
-
-      ///create puck transform
-      btTransform boardTransform;
-
-      btDefaultMotionState* myMotionState;
-      btRigidBody::btRigidBodyConstructionInfo* rbInfo;
-      btRigidBody* body;
-      btTransform startTransform;
-   
       btDefaultMotionState* boardMotionState;
       btDefaultMotionState* puckMotionState;
       btDefaultMotionState* paddle1MotionState;
