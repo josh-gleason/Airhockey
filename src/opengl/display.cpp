@@ -82,3 +82,63 @@ void ReSizeGLScene(int Width, int Height)
 
    //options.camera.set_aspect_ratio( aspect);
 }
+
+void init_menu( ){
+   
+   /*
+   options.state_submenu = glutCreateMenu( &processStateMenuEvents);
+   glutAddMenuEntry("Pause",0);
+   glutAddMenuEntry("Reset",1);
+   glutAddMenuEntry("Resume",2);
+
+   options.shape_submenu = glutCreateMenu( &processShapeMenuEvents);
+   glutAddMenuEntry("Round",0);
+   glutAddMenuEntry("Square",1);
+   glutAddMenuEntry("Wedge",2);
+
+   options.ai_submenu = glutCreateMenu( &processAIMenuEvents);
+   glutAddMenuEntry("AI On", 0);
+   glutAddMenuEntry("AI Off",1);
+
+   options.difficulty_submenu = glutCreateMenu( &processDiffMenuEvens);
+   glutAddMenuEntry("God", 0);
+   glutAddMenuEntry("Tough",1);
+   glutAddMenuEntry("Okay",2);
+   glutAddMenuEntry("I'm a wimp",3);
+   */
+   options.menu = glutCreateMenu( &processMenuEvents );
+   //glutAddSubMenu("Game State",options.state_submenu);
+   //glutAddSubMenu("Paddle Shape",options.shape_submenu);
+   //glutAddSubMenu("AI Mode",options.ai_submenu);
+   //glutAddSubMenu("Difficulty",options.difficulty_submenu);
+   glutAddMenuEntry("Hall of Fame",1);
+   
+   glutAddMenuEntry("Quit Simulation",0);
+   glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+void processMenuEvents( int option ){
+
+   /*********************************************************/
+   /*    If not picking mode, then unset pick mode flag     */
+   /*********************************************************/
+   switch( option ){
+
+      /**************************************/
+      /*             Quit Program           */
+      /**************************************/
+      case 0: exit(0);
+              break;
+
+      /*******************************/
+      /*        HALL OF FAME         */
+      /*******************************/
+      case 1:
+         if(options.view_mode == 1)
+            options.view_mode = 0;
+         else
+            options.view_mode = 1;
+         break;
+
+   }
+}

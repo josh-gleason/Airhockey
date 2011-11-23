@@ -75,7 +75,7 @@ class Parameters{
       //Camera  camera;
       
       /** Menu Object  */
-      //int menu;
+      GLuint menu;
    
       /** Mouse is down command */
       bool mouse_down;
