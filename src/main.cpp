@@ -198,6 +198,8 @@ int main( int argc, char **argv )
    glutSpecialFunc( special_keys);
    glutSpecialUpFunc( special_Upkeys);
 
+   init_menu();
+   
    // Mouse func
    glutMouseFunc( mouseEvent );
 

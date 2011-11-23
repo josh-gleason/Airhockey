@@ -16,6 +16,9 @@ void display_function( );
 
 void init_menu();
 
-void ReSizeGLScene(int Width, int Height);
+void processMenuEvents( int option );
+void processStateMenuEvents( int option );
+void processShapeMenuEvents( int option );
+
 
 #endif
