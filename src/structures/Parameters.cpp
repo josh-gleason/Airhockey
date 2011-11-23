@@ -42,9 +42,13 @@ Parameters::Parameters( ){
    projectionMatrix = Perspective(fova, ratio, zNear, zFar);
 
    board = NULL;
-   paddle1 = NULL;
-   paddle2 = NULL;
    puck = NULL;
+   round1 = NULL;
+   round2 = NULL;
+   tri1 = NULL;
+   tri2 = NULL;
+   sqr1 = NULL;
+   sqr2 = NULL;
 
    p1_score = 0;
    p2_score = 0;
@@ -60,12 +64,20 @@ Parameters::~Parameters(){
 
    if(board != NULL)
       delete board;
-   if(paddle1 != NULL)
-      delete paddle1;
-   if(paddle2 != NULL)
-      delete paddle2;
    if(puck != NULL)
       delete puck;
+   if(round1 != NULL)
+      delete round1;
+   if(round2 != NULL)
+      delete round2;
+   if(tri1 != NULL)
+      delete tri1;
+   if(tri2 != NULL)
+      delete tri2;
+   if(sqr1 != NULL)
+      delete sqr1;
+   if(sqr2 != NULL)
+      delete sqr2;
 }
 
 void Parameters::construct_objects( ){
@@ -95,6 +107,25 @@ void Parameters::set_paddle2_dest(vec2 dest){
    dest.y = max(-1.749742f,dest.y);
 
    paddle2_dest = dest;
+}
+
+void Parameters::set_paddle_shape( PaddleType shape )
+{
+   if ( shape == ROUND ) {
+      paddle1 = round1;
+      paddle2 = round2;
+
+      //paddle1Shape
+
+   } else if ( shape == TRIANGLE ) {
+      paddle1 = tri1;
+      paddle2 = tri2;
+   } else if ( shape == SQUARE ) {
+      paddle1 = sqr1;
+      paddle2 = sqr2;
+   }
+
+   // TODO: change some other things here
 }
 
 void Parameters::rotate(  ){

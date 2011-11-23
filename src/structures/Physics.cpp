@@ -14,15 +14,15 @@ Physics_Model::Physics_Model(){
    action = 0;
 
    puck_mass = 5.0;
-   puck_friction = 0.00;
-   puck_restitution = 0.8;
+   puck_friction = 0.01;
+   puck_restitution = 0.9;
 
    pdl_mass = 15.0;
    pdl_friction = 0.01;
-   pdl_restitution = 0.8;
+   pdl_restitution = 0.9;
 
    board_friction = 0.01;
-   board_restitution = 0.6;
+   board_restitution = 0.9;
 }
 
 void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 const& paddle1Size, vec2 const& paddle2Size, 
@@ -117,7 +117,14 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    /*                  Paddle1               */
    /******************************************/
    ///build paddle1 collision model
-   paddle1Shape = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
+   paddle1Circle = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
+
+   // TODO
+   //paddle1Triangle = new btCylinderShape(btVector3(btScalar(paddleSize.x),btScalar(0.1),btScalar(paddle1Size.x)));
+
+   //paddle1Square = new btBoxShape(btVector3(btScalar(paddleSize.x), btScalar(0.1), btScalar(paddle1Size.x)));
+
+   paddle1Shape = paddle1Circle;
 
    //build motion state (PADDLE1)
    paddle1MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle1Cent.x,0.0, paddle1Cent.z)));

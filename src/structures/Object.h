@@ -20,7 +20,7 @@ class Object{
 
       void make_empty();
          
-      void init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_dif, const vec4& l_spec, bool load_shader=true );
+      void init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_dif, const vec4& l_spec, bool load_shader=true, int rotate=0 );
 
       void draw_shape( mat4 const& worldviewMat, mat4 const& proj, vec4 const& l_pos );
 
@@ -92,7 +92,8 @@ class Object{
       double z_width;
       vec3 centroid;
 
-      double scale_factor;
+      double scale_factor; // scale at load
+      GLfloat radians;  // rotation at load
 };
 
 #endif
