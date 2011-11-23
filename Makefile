@@ -32,11 +32,18 @@ HEADER_FILES  = $(MATH)/mat \
 OBJECT_NAMES  = $(CORE)/parser \
                 $(STRUCTURES)/Parameters \
                 $(STRUCTURES)/Camera \
+<<<<<<< HEAD
 					 $(STRUCTURES)/Light \
 					 $(STRUCTURES)/Object \
 					 $(STRUCTURES)/Physics \
 					 $(STRUCTURES)/Scoreboard \
 					 $(MATH)/vector \
+=======
+                $(STRUCTURES)/Light \
+                $(STRUCTURES)/Object \
+                $(STRUCTURES)/Physics \
+                $(MATH)/vector \
+>>>>>>> 7331067a903c35882bb0779ca80ccb8753ac180d
                 $(MATH)/triangulation \
                 $(OPENGL)/display \
                 $(OPENGL)/initialization \
@@ -45,11 +52,12 @@ OBJECT_NAMES  = $(CORE)/parser \
                 $(OPENGL)/shader_processing \
                 $(OPENGL)/timer \
                 $(OPENGL)/reshape \
-					 $(MODELLOADER)/list \
-					 $(MODELLOADER)/string_extra \
-					 $(MODELLOADER)/obj_parser \
-					 $(MODELLOADER)/print_data \
-					 $(MODELLOADER)/objLoader
+                $(OPENGL)/ai \
+                $(MODELLOADER)/list \
+                $(MODELLOADER)/string_extra \
+                $(MODELLOADER)/obj_parser \
+                $(MODELLOADER)/print_data \
+                $(MODELLOADER)/objLoader
 
 ######################### SETTINGS VARIABLES ###################################
 
@@ -65,7 +73,7 @@ ifeq ($(shell uname),Linux)
   OPENGL_LIBS    = -lglut -lGLU -lGL -lGLEW
   OPENGL_INCLUDE =
   BULLET_INCLUDE = `pkg-config bullet --cflags`
-  BULLET_LIBS	  = `pkg-config bullet --libs`
+  BULLET_LIBS    = `pkg-config bullet --libs`
 else  # Apple
   BOOST_LIBS     = -L/opt/local/lib -lboost_system -lboost_filesystem \
                    -lboost_program_options
@@ -73,7 +81,7 @@ else  # Apple
   OPENGL_LIBS    = -framework OpenGL -framework GLUT
   OPENGL_INCLUDE =
   BULLET_INCLUDE = -I/opt/local/include/bullet
-  BULLET_LIBS 	  = -L/opt/local/lib -lLinearMath -lBulletCollision -lBulletDynamics
+  BULLET_LIBS    = -L/opt/local/lib -lLinearMath -lBulletCollision -lBulletDynamics
 endif
 
 LIBS          = $(OPENGL_LIBS) $(BOOST_LIBS) $(BULLET_LIBS)

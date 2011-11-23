@@ -35,6 +35,9 @@ class Object{
       void set_translation( const vec3& trans);
       void adjust_translation( const vec3& motion );
 
+      // return const reference so that no copies are made
+      const vec4& get_velocity()const;
+
       vec4* get_vertices();
       size_t num_verts();
 
@@ -78,6 +81,7 @@ class Object{
       GLfloat* shininess;
 
       vec4 translation;
+      vec4 velocity;
 
       // no need for scaleing or rotation
       // vec4 rotation

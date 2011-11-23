@@ -44,6 +44,8 @@ class Parameters{
 
    public:
 
+      enum PaddleType {ROUND, TRIANGLE, SQUARE};
+
       /**
         * Parameter Constructor
         * 
@@ -119,8 +121,8 @@ class Parameters{
 
       GLfloat pdl_moveStep;
       GLfloat pdl_timerStep;
-      btScalar pdl_maxVelocity;
-      bool pdl_high_quality_model;
+      btScalar pdl1_maxVelocity;
+      btScalar pdl2_maxVelocity;
 
       // the destination that the paddles attempt to move to in (x,z) coords
       vec2 paddle1_dest;
@@ -145,6 +147,10 @@ class Parameters{
       int p1_score;
       int p2_score;
 
+      // player 1 is the AI player right now
+      bool ai_enabled;
+      float ai_aggressive; // TODO not working
+      float ai_difficulty;
 };
 
 #endif

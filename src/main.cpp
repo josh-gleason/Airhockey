@@ -19,6 +19,7 @@
 #include "timer.h"
 #include "reshape.h"
 #include "parser.h"
+#include "ai.h"
 
 // structures/
 #include "Parameters.h"
@@ -67,7 +68,6 @@ void init()
    options.light_timerStep = 10;
    options.light_moveStep = 0.06;
 
-
    // Load shaders and use the resulting shader program
    options.program = InitShader( "data/shaders/vshader.glsl", "data/shaders/fshader.glsl" );
    glUseProgram( options.program );
@@ -80,13 +80,8 @@ void init()
    options.board = new Object("data/models/Airhockey.obj", 0.5, options.program);
    Object walls("data/models/walls.obj", 0.5, options.program);   // for physics
    options.puck = new Object("data/models/Puck.obj", 0.2, options.program);
-   if ( options.pdl_high_quality_model ) {
-      options.paddle1 = new Object("data/models/Paddle.obj", 0.2, options.program);
-      options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
-   } else {
-      options.paddle1 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
-      options.paddle2 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
-   }
+   options.paddle1 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
 
    options.board->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false );  // dont load shader
@@ -130,6 +125,7 @@ void init()
                          options.paddle1->get_vertices(), options.paddle1->num_verts());
 
 
+   enableAI();
    /***************************************/
    /*          Texture Mapping            */
    /***************************************/
@@ -147,19 +143,21 @@ int main( int argc, char **argv )
    parse_arguements( argc, argv, options );
 
    cout << "================ Camera Controls ================" << endl
-      << "============ (w,a,s,d,q,e) movement =============" << endl
-      << " w - Move Forward          s - Move Backwards    " << endl
-      << " a - Move Left             d - Move Right        " << endl
-      << " q - Move Up               e - Move Down         " << endl
-      << "============== (u,h,j,k,y,i) look ===============" << endl
-      << " i - Look Up               k - Look Down         " << endl
-      << " j - Look Left             l - Look Right        " << endl
-      << "== Twist works only if camera is in free mode ===" << endl
-      << " u - Twist CCW             o - Twist CW          " << endl
-      << "=================== lighting model ==============" << endl 
-      << " n - move light -z axis   m - move light +z axis " << endl
-      << " , - move light -x axis   . - move light +x axis " << endl
-      << "=================================================" << endl << endl;
+        << "============ (w,a,s,d,q,e) movement =============" << endl
+        << " w - Move Forward          s - Move Backwards    " << endl
+        << " a - Move Left             d - Move Right        " << endl
+        << " q - Move Up               e - Move Down         " << endl
+        << "============== (u,h,j,k,y,i) look ===============" << endl
+        << " i - Look Up               k - Look Down         " << endl
+        << " j - Look Left             l - Look Right        " << endl
+        << "== Twist works only if camera is in free mode ===" << endl
+        << " u - Twist CCW             o - Twist CW          " << endl
+        << "=================== lighting model ==============" << endl 
+        << " n - move light -z axis   m - move light +z axis " << endl
+        << " , - move light -x axis   . - move light +x axis " << endl
+        << "=================== change paddle  ==============" << endl 
+        << " x - change paddle                               " << endl
+        << "=================================================" << endl << endl;
 
    srand(time(0));
 
@@ -194,7 +192,7 @@ int main( int argc, char **argv )
    glutReshapeFunc( reshape );
 
    // timer function
-   glutTimerFunc( 20, timerHandle, 0);
+   glutTimerFunc( 17, timerHandle, 0);
 
    glutMainLoop();
    return 0;

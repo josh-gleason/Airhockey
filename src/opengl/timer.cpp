@@ -46,6 +46,10 @@ void timerHandle( int state ){
 
    /////////// MOVE PADDLE /////////////////////////////////////////////////////
    {
+      btScalar maxVel = options.pdl1_maxVelocity;
+      if ( options.ai_enabled )
+         maxVel *= options.ai_difficulty;
+
       // reduce velocity to zero
       options.physics.paddle1RigidBody->setLinearVelocity(btVector3(0.0,0.0,0.0));
       options.physics.paddle1RigidBody->setAngularVelocity(btVector3(0.0,0.0,0.0));
@@ -61,7 +65,7 @@ void timerHandle( int state ){
       btScalar f_xVal = (pos_f.getX()-pos_i.getX())*mass/t/t;
       btScalar f_zVal = (pos_f.getZ()-pos_i.getZ())*mass/t/t;
 
-      if ( options.pdl_maxVelocity > 0 )
+      if ( maxVel > 0 )
       {
          // compute what the velocity will be
          btVector3 vel_new = btVector3(f_xVal * t / mass, 0.0, f_zVal * t / mass);
@@ -70,11 +74,12 @@ void timerHandle( int state ){
          // if the new velocity is greater, scale the force by the ratio
          // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
          //       and I know its zero because I just set it to zero :D
-         if ( vel_newMag > options.pdl_maxVelocity )
+
+         if ( vel_newMag > maxVel )
          {
             // scale down the force to limit the velocity
-            f_xVal = f_xVal / vel_newMag * options.pdl_maxVelocity;
-            f_zVal = f_zVal / vel_newMag * options.pdl_maxVelocity;
+            f_xVal = f_xVal / vel_newMag * maxVel;
+            f_zVal = f_zVal / vel_newMag * maxVel;
          }
       }
 
@@ -113,7 +118,7 @@ void timerHandle( int state ){
       btScalar f_xVal = (pos_f.getX()-pos_i.getX())*mass/t/t;
       btScalar f_zVal = (pos_f.getZ()-pos_i.getZ())*mass/t/t;
 
-      if ( options.pdl_maxVelocity > 0 )
+      if ( options.pdl2_maxVelocity > 0 )
       {
          // compute what the velocity will be
          btVector3 vel_new = btVector3(f_xVal * t / mass, 0.0, f_zVal * t / mass);
@@ -122,11 +127,11 @@ void timerHandle( int state ){
          // if the new velocity is greater, scale the force by the ratio
          // Note: can be done b/c velocity is proportional to Force iff initial velocity=0
          //       and I know its zero because I just set it to zero :D
-         if ( vel_newMag > options.pdl_maxVelocity )
+         if ( vel_newMag > options.pdl2_maxVelocity )
          {
             // scale down the force to limit the velocity
-            f_xVal = f_xVal / vel_newMag * options.pdl_maxVelocity;
-            f_zVal = f_zVal / vel_newMag * options.pdl_maxVelocity;
+            f_xVal = f_xVal / vel_newMag * options.pdl2_maxVelocity;
+            f_zVal = f_zVal / vel_newMag * options.pdl2_maxVelocity;
          }
       }
 
@@ -147,16 +152,16 @@ void timerHandle( int state ){
 
    // first check if scoreing is possible
    
-   if ( puck_pos.z > 1.949742 || puck_pos.z < -1.949742 ) { // ob
+   if ( puck_pos.z > 2.2 || puck_pos.z < -2.2 ) { // ob
       ob = true;
    }
    else if ( puck_pos.z < 0.374856f && puck_pos.z > -0.374856f ) {  // scoring possible
-      if ( puck_pos.x > 3.625 )
+      if ( puck_pos.x > 4 )
          p1scored = true;
-      else if ( puck_pos.x < -3.625 )
+      else if ( puck_pos.x < -4 )
          p2scored = true;
    }
-   else if ( puck_pos.x > 3.625 || puck_pos.x < -3.625 ) {  // ob
+   else if ( puck_pos.x > 4 || puck_pos.x < -4 ) {  // ob
       ob = true;
    }
 
