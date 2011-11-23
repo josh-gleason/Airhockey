@@ -67,6 +67,8 @@ class HUD{
 
       void p1_score( const GLuint& score );
       void p2_score( const GLuint& score );
+      //void p1_win( const GLuint& score );
+      //void p2_win( const GLuint& score );
 
    private:
 

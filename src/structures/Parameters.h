@@ -151,6 +151,9 @@ class Parameters{
       string p1name;
       string p2name;
 
+      GLuint p1_wins;
+      GLuint p2_wins;
+
       HUD hud;
       Scoreboard scoreboard;
       Camera camera;

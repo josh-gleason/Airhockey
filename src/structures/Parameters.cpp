@@ -1,7 +1,9 @@
 #include "Parameters.h"
 
 Parameters::Parameters( ){
-
+   
+   p1_wins = 0;
+   p2_wins = 0;
    winner = NULL;
    //Mouse anchor set to zero
    //mouse_anchor = 0;
