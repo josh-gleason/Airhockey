@@ -30,7 +30,8 @@ Parameters::Parameters( ){
 
    // in units/sec (mostly this is the to restrict the mouse movement to the
    // max speed of the paddle) negative value disables maximum (unwise)
-   pdl_maxVelocity = sqrt(pdl_moveStep*pdl_moveStep*7200.);
+   pdl1_maxVelocity = sqrt(pdl_moveStep*pdl_moveStep*7200.);
+   pdl2_maxVelocity = 1.5*sqrt(pdl_moveStep*pdl_moveStep*7200.);
 
    mouse_down = false;
 
@@ -43,6 +44,12 @@ Parameters::Parameters( ){
 
    p1_score = 0;
    p2_score = 0;
+
+   // should start false
+   ai_enabled = false;
+
+   // range [0,1]
+   ai_aggressive = 0.5;
 }
 
 Parameters::~Parameters(){

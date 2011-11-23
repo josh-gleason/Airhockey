@@ -19,6 +19,7 @@
 #include "timer.h"
 #include "reshape.h"
 #include "parser.h"
+#include "ai.h"
 
 // structures/
 #include "Parameters.h"
@@ -129,6 +130,8 @@ void init()
                          options.puck->get_vertices(),   options.puck->num_verts(),
                          options.paddle1->get_vertices(), options.paddle1->num_verts());
 
+
+   enableAI();
 }
 
 //----------------------------------------------------------------------------
@@ -184,7 +187,7 @@ int main( int argc, char **argv )
    glutReshapeFunc( reshape );
 
    // timer function
-   glutTimerFunc( 20, timerHandle, 0);
+   glutTimerFunc( 17, timerHandle, 0);
 
    glutMainLoop();
    return 0;
