@@ -58,7 +58,6 @@ void display_function( void )
 
    }
    else if( options.view_mode == 2 ){
-      cout << "inside winner" << endl;
       glClearColor( 1.0, 1.0, 1.0, 1.0);
       options.winner->draw_shape();
    }
@@ -151,7 +150,6 @@ void processStateMenuEvents( int option ){
          options.view_mode = 4;
          break;
       case 1:
-         cout << "RESETTING" << endl;
          //reset score
          options.p1_score = 0;
          options.p2_score = 0;

@@ -35,6 +35,16 @@ using namespace std;
 
 //typedef boost::shared_ptr<Shape> ShapePtr;
 
+class Frame{
+
+   vec4 translation;
+   mat4 worldview;
+   mat4 rotation;
+   mat4 projection;
+   vec4 light_position;
+
+};
+
 /**
    @class Parameters
    @brief Storage for program options
