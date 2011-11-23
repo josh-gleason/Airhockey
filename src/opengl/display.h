@@ -18,6 +18,7 @@ void init_menu();
 
 void processMenuEvents( int option );
 void processStateMenuEvents( int option );
+void processShapeMenuEvents( int option );
 
 
 #endif

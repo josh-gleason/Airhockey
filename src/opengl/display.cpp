@@ -89,12 +89,12 @@ void init_menu( ){
    glutAddMenuEntry("Reset",1);
    glutAddMenuEntry("Resume",2);
 
-   /*
    options.shape_submenu = glutCreateMenu( &processShapeMenuEvents);
    glutAddMenuEntry("Round",0);
    glutAddMenuEntry("Square",1);
    glutAddMenuEntry("Wedge",2);
 
+   /*
    options.ai_submenu = glutCreateMenu( &processAIMenuEvents);
    glutAddMenuEntry("AI On", 0);
    glutAddMenuEntry("AI Off",1);
@@ -107,7 +107,7 @@ void init_menu( ){
    */
    options.menu = glutCreateMenu( &processMenuEvents );
    glutAddSubMenu("Game State",options.state_submenu);
-   //glutAddSubMenu("Paddle Shape",options.shape_submenu);
+   glutAddSubMenu("Paddle Shape",options.shape_submenu);
    //glutAddSubMenu("AI Mode",options.ai_submenu);
    //glutAddSubMenu("Difficulty",options.difficulty_submenu);
    glutAddMenuEntry("Hall of Fame",1);
@@ -217,3 +217,20 @@ void processStateMenuEvents( int option ){
 
    }
 }
+
+void processShapeMenuEvents( int option ){
+
+   switch( option ){
+
+      case 0: 
+         options.set_paddle_shape(Parameters::ROUND);
+         break;
+      case 1:
+         options.set_paddle_shape(Parameters::SQUARE);
+         break;
+      case 2:
+         options.set_paddle_shape(Parameters::TRIANGLE);
+         break;
+   }
+}
+
