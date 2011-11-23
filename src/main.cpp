@@ -143,6 +143,7 @@ void init()
    /***************************************/
    // build scoreboard
    options.scoreboard.init( options.program );
+   options.hud.init( options.program, options.p1name, options.p2name );
 
 }
 

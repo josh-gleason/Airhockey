@@ -33,6 +33,9 @@ void parse_arguements( int argc, char* argv[], Parameters& options ){
    /***********************************/
    config_file.add_options()
 
+   ("PLAYER1_NAME",po::value<string>(&options.p1name)->default_value("PLAYER 1"), " name of player 1")
+   ("PLAYER2_NAME",po::value<string>(&options.p2name)->default_value("PLAYER 2"), " name of player 2")
+   
    ///GLUT WINDOW Parameters
    ("GLUT_WIN_X",po::value<int>(&gwx)->default_value(-1),"default width of GLUT window")
    ("GLUT_WIN_Y",po::value<int>(&gwy)->default_value(-1),"default height of GLUT window")

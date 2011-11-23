@@ -7,6 +7,8 @@ void display_function( void )
 
 
    if( options.view_mode == 0){
+      glClearColor( 0.5, 0.5, 0.5, 1.0 );
+      
       //glUniform3fv( theta, 1, Theta );
       mat4 ident;
       options.board->draw_shape(   options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
@@ -47,6 +49,7 @@ void display_function( void )
       options.puck->draw_shape(    options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
       options.paddle1->draw_shape( options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
       options.paddle2->draw_shape( options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
+      options.hud.draw_shape();
    }
    else if( options.view_mode == 1 ){
       
