@@ -4,6 +4,7 @@
 #include "GL.h"
 
 #include "../structures/Parameters.h"
+#include "ai.h"
 
 #include <sstream>
 #include <string>
@@ -19,6 +20,7 @@ void init_menu();
 void processMenuEvents( int option );
 void processStateMenuEvents( int option );
 void processShapeMenuEvents( int option );
-
+void processAIMenuEvents( int option );
+void processDiffMenuEvents( int option );
 
 #endif
