@@ -20,6 +20,7 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Physics.h"
+#include "Scoreboard.h"
 
 // ../math/
 #include "vector.h"
@@ -84,6 +85,7 @@ class Parameters{
 
       string filename;
 
+      GLuint texture_program;
       GLuint program;
 
       GLuint model_view;
@@ -127,6 +129,7 @@ class Parameters{
       void set_paddle1_dest(vec2 dest);
       void set_paddle2_dest(vec2 dest);
 
+      Scoreboard scoreboard;
       Camera camera;
       Light light;
       Physics_Model physics;

@@ -129,6 +129,16 @@ void init()
                          options.puck->get_vertices(),   options.puck->num_verts(),
                          options.paddle1->get_vertices(), options.paddle1->num_verts());
 
+
+   /***************************************/
+   /*          Texture Mapping            */
+   /***************************************/
+   // Load shaders and use the resulting shader program
+   options.texture_program = InitShader( "data/shaders/vshader_texture.glsl", "data/shaders/fshader_texture.glsl" );
+
+   // build scoreboard
+   options.scoreboard.init( options.texture_program );
+
 }
 
 //----------------------------------------------------------------------------
@@ -137,19 +147,19 @@ int main( int argc, char **argv )
    parse_arguements( argc, argv, options );
 
    cout << "================ Camera Controls ================" << endl
-        << "============ (w,a,s,d,q,e) movement =============" << endl
-        << " w - Move Forward          s - Move Backwards    " << endl
-        << " a - Move Left             d - Move Right        " << endl
-        << " q - Move Up               e - Move Down         " << endl
-        << "============== (u,h,j,k,y,i) look ===============" << endl
-        << " i - Look Up               k - Look Down         " << endl
-        << " j - Look Left             l - Look Right        " << endl
-        << "== Twist works only if camera is in free mode ===" << endl
-        << " u - Twist CCW             o - Twist CW          " << endl
-        << "=================== lighting model ==============" << endl 
-        << " n - move light -z axis   m - move light +z axis " << endl
-        << " , - move light -x axis   . - move light +x axis " << endl
-        << "=================================================" << endl << endl;
+      << "============ (w,a,s,d,q,e) movement =============" << endl
+      << " w - Move Forward          s - Move Backwards    " << endl
+      << " a - Move Left             d - Move Right        " << endl
+      << " q - Move Up               e - Move Down         " << endl
+      << "============== (u,h,j,k,y,i) look ===============" << endl
+      << " i - Look Up               k - Look Down         " << endl
+      << " j - Look Left             l - Look Right        " << endl
+      << "== Twist works only if camera is in free mode ===" << endl
+      << " u - Twist CCW             o - Twist CW          " << endl
+      << "=================== lighting model ==============" << endl 
+      << " n - move light -z axis   m - move light +z axis " << endl
+      << " , - move light -x axis   . - move light +x axis " << endl
+      << "=================================================" << endl << endl;
 
    srand(time(0));
 

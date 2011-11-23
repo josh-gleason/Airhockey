@@ -170,6 +170,7 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
 
 void Object::draw_shape( mat4 const& worldviewMat, mat4 const& proj, vec4 const& l_pos ){
 
+   glUseProgram(program);
 #ifdef __APPLE__
    glBindVertexArrayAPPLE( vao );
 #else
