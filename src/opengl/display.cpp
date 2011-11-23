@@ -94,22 +94,21 @@ void init_menu( ){
    glutAddMenuEntry("Square",1);
    glutAddMenuEntry("Wedge",2);
 
-   /*
    options.ai_submenu = glutCreateMenu( &processAIMenuEvents);
    glutAddMenuEntry("AI On", 0);
    glutAddMenuEntry("AI Off",1);
 
-   options.difficulty_submenu = glutCreateMenu( &processDiffMenuEvens);
+   options.difficulty_submenu = glutCreateMenu( &processDiffMenuEvents);
    glutAddMenuEntry("God", 0);
    glutAddMenuEntry("Tough",1);
    glutAddMenuEntry("Okay",2);
    glutAddMenuEntry("I'm a wimp",3);
-   */
+   
    options.menu = glutCreateMenu( &processMenuEvents );
    glutAddSubMenu("Game State",options.state_submenu);
    glutAddSubMenu("Paddle Shape",options.shape_submenu);
-   //glutAddSubMenu("AI Mode",options.ai_submenu);
-   //glutAddSubMenu("Difficulty",options.difficulty_submenu);
+   glutAddSubMenu("AI Mode",options.ai_submenu);
+   glutAddSubMenu("Difficulty",options.difficulty_submenu);
    glutAddMenuEntry("Hall of Fame",1);
    
    glutAddMenuEntry("Quit Simulation",0);
@@ -234,3 +233,34 @@ void processShapeMenuEvents( int option ){
    }
 }
 
+void processAIMenuEvents( int option ){
+
+   switch( option ){
+
+      case 0: 
+         enableAI();
+         break;
+      case 1:
+         disableAI();
+         break;
+   }
+}
+
+void processDiffMenuEvents( int option ){
+
+   switch( option ){
+
+      case 0:
+         options.ai_difficulty = 0.5;
+         break;
+      case 1:
+         options.ai_difficulty = 0.4;
+         break;
+      case 2:
+         options.ai_difficulty = 0.3;
+         break;
+      case 3: 
+         options.ai_difficulty = 0.2;
+         break;
+   }
+}

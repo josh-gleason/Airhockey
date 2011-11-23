@@ -78,6 +78,8 @@ class Parameters{
       GLuint menu;
       GLuint shape_submenu;
       GLuint state_submenu;
+      GLuint ai_submenu;
+      GLuint difficulty_submenu;
 
       /** Mouse is down command */
       bool mouse_down;
