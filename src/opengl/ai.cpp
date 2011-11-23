@@ -42,19 +42,31 @@ void aiTimer(int value)
 
    // special case to help unstick puck down near goal
    static int stuck_frames;
+   static int move_frames=0;
+   static btVector3 appliedForce;
    if ( puck_pos.x < -3.31 && fabs(puck_pos.y) > 0.374856 && fabs(puck_velocity.x) < 0.05 )
    {
       stuck_frames++;
       if ( stuck_frames > 10 )
       {
-         // apply force to the puck
-         options.physics.puckRigidBody->applyCentralForce(btVector3(100,0.0,0));
-         movement.x = options.pdl1_maxVelocity;
-         movement.y = 0.0;
+         // apply this force for 15 frames to the puck
+         appliedForce = btVector3(50,0.0,rand()%50-25.0);
+         move_frames = 15; // move away for 15 frames
       }
    }
    else
       stuck_frames = 0;
+
+   if ( move_frames > 0 )
+   {
+      // apply force to the puck and move paddle away
+      options.physics.puckRigidBody->applyCentralForce(appliedForce);
+      movement.x = options.pdl1_maxVelocity;
+      movement.y = 0.0;
+      move_frames--;
+   }
+      
+
 
    // move paddle
    options.set_paddle1_dest( paddle_pos + movement );

@@ -13,16 +13,16 @@ Physics_Model::Physics_Model(){
 
    action = 0;
 
-   puck_mass = 5.0;
-   puck_friction = 0.5;
-   puck_restitution = 0.8;
+   puck_mass = 7.0;
+   puck_friction = 0.01;
+   puck_restitution = 0.9;
 
    pdl_mass = 15.0;
-   pdl_friction = 0.05;
-   pdl_restitution = 0.8;
+   pdl_friction = 0.01;
+   pdl_restitution = 0.9;
 
    board_friction = 0.5;
-   board_restitution = 0.8;
+   board_restitution = 0.9;
 }
 
 void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 const& paddle1Size, vec2 const& paddle2Size, 

@@ -28,10 +28,9 @@ void timerHandle( int state ){
                      rotation[2][0],rotation[2][1],rotation[2][2],0.0,
                      0.0,           0.0,           0.0,           1.0);
 
-         btQuaternion rot = options.physics.puck_trans.getRotation();
-
-         std::cout << "PUCK W: " << rot.getW();
-         std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+         //btQuaternion rot = options.physics.puck_trans.getRotation();
+         //std::cout << "PUCK W: " << rot.getW();
+         //std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
 
          options.puck->set_rotation( rotMat );
       }
@@ -66,10 +65,9 @@ void timerHandle( int state ){
                      rotation[2][0],rotation[2][1],rotation[2][2],0.0,
                      0.0,           0.0,           0.0,           1.0);
 
-         btQuaternion rot = options.physics.paddle1_trans.getRotation();
-
-         std::cout << "PADDLE1 W: " << rot.getW();
-         std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+         //btQuaternion rot = options.physics.paddle1_trans.getRotation();
+         //std::cout << "PADDLE1 W: " << rot.getW();
+         //std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
 
          options.paddle1->set_rotation( rotMat );
       }
@@ -140,10 +138,9 @@ void timerHandle( int state ){
                      rotation[2][0],rotation[2][1],rotation[2][2],0.0,
                      0.0,           0.0,           0.0,           1.0);
 
-         btQuaternion rot = options.physics.paddle2_trans.getRotation();
-
-         std::cout << "PADDLE2 W: " << rot.getW();
-         std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+         //btQuaternion rot = options.physics.paddle2_trans.getRotation();
+         //std::cout << "PADDLE2 W: " << rot.getW();
+         //std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
 
          options.paddle2->set_rotation( rotMat );
       }
