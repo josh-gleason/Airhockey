@@ -18,19 +18,21 @@ void timerHandle( int state ){
       //get an update of the motion state
       options.physics.puckRigidBody->getMotionState()->getWorldTransform( options.physics.puck_trans );
 
-      btMatrix3x3 rotation = options.physics.puck_trans.getBasis();
+      {
+         btMatrix3x3 rotation = options.physics.puck_trans.getBasis();
 
-      mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,
-                  rotation[1][0],rotation[1][1],rotation[1][2],0.0,
-                  rotation[2][0],rotation[2][1],rotation[2][2],0.0,
-                  0.0,           0.0,           0.0,           1.0);
+         mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,
+                     rotation[1][0],rotation[1][1],rotation[1][2],0.0,
+                     rotation[2][0],rotation[2][1],rotation[2][2],0.0,
+                     0.0,           0.0,           0.0,           1.0);
 
-      btQuaternion rot = options.physics.puck_trans.getRotation();
+         btQuaternion rot = options.physics.puck_trans.getRotation();
 
-      std::cout << "W: " << rot.getW();
-      std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+         std::cout << "PUCK W: " << rot.getW();
+         std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
 
-      options.puck->set_rotation( rotMat );
+         options.puck->set_rotation( rotMat );
+      }
 
       //load new position into structure for puck model
       motion = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
@@ -50,6 +52,23 @@ void timerHandle( int state ){
 
       //get an update of the motion state
       options.physics.paddle1RigidBody->getMotionState()->getWorldTransform( options.physics.paddle1_trans );
+      
+      {
+         btMatrix3x3 rotation = options.physics.paddle1_trans.getBasis();
+
+         mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,
+                     rotation[1][0],rotation[1][1],rotation[1][2],0.0,
+                     rotation[2][0],rotation[2][1],rotation[2][2],0.0,
+                     0.0,           0.0,           0.0,           1.0);
+
+         btQuaternion rot = options.physics.paddle1_trans.getRotation();
+
+         std::cout << "PADDLE1 W: " << rot.getW();
+         std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+
+         options.paddle1->set_rotation( rotMat );
+      }
+
 
       //load new position into structure for paddle1 model
       motion = vec3( options.physics.paddle1_trans.getOrigin().getX(), options.physics.paddle1_trans.getOrigin().getY(), options.physics.paddle1_trans.getOrigin().getZ());
@@ -107,6 +126,23 @@ void timerHandle( int state ){
       /*********************/
       //get an update of the motion state
       options.physics.paddle2RigidBody->getMotionState()->getWorldTransform( options.physics.paddle2_trans );
+      
+      {
+         btMatrix3x3 rotation = options.physics.paddle2_trans.getBasis();
+
+         mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,
+                     rotation[1][0],rotation[1][1],rotation[1][2],0.0,
+                     rotation[2][0],rotation[2][1],rotation[2][2],0.0,
+                     0.0,           0.0,           0.0,           1.0);
+
+         btQuaternion rot = options.physics.paddle2_trans.getRotation();
+
+         std::cout << "PADDLE2 W: " << rot.getW();
+         std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+
+         options.paddle2->set_rotation( rotMat );
+      }
+
 
       //load new position into structure for paddle2 model
       motion = vec3( options.physics.paddle2_trans.getOrigin().getX(), options.physics.paddle2_trans.getOrigin().getY(), options.physics.paddle2_trans.getOrigin().getZ());
