@@ -19,6 +19,8 @@ void timerHandle( int state ){
       options.physics.puckRigidBody->getMotionState()->getWorldTransform( options.physics.puck_trans );
 
       {
+         options.physics.puckRigidBody->setAngularVelocity(btVector3(0.0,0.0,0.0));
+         
          btMatrix3x3 rotation = options.physics.puck_trans.getBasis();
 
          mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,
@@ -54,6 +56,9 @@ void timerHandle( int state ){
       options.physics.paddle1RigidBody->getMotionState()->getWorldTransform( options.physics.paddle1_trans );
       
       {
+         // set rotation to zero (had to do it :()
+         options.physics.paddle1RigidBody->setAngularVelocity(btVector3(0.0,0.0,0.0));
+         
          btMatrix3x3 rotation = options.physics.paddle1_trans.getBasis();
 
          mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,

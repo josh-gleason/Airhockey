@@ -114,7 +114,7 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
 
    {
       btTransform frameInB = btTransform::getIdentity();
-      frameInB.setOrigin(btVector3(0.0,0.0,0.0));
+      frameInB.setOrigin(btVector3(0.0,0.01,0.0));
 
       btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *puckRigidBody,frameInB, true );
 
@@ -131,7 +131,6 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
       XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
 
       dynamicsWorld->addConstraint(XZplaneConstraint);
-      XZplaneConstraint->setDbgDrawSize(btScalar(5.f));
    }
 
    /******************************************/
@@ -182,7 +181,6 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
       XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
 
       dynamicsWorld->addConstraint(XZplaneConstraint);
-      XZplaneConstraint->setDbgDrawSize(btScalar(5.f));
    }
 
 
@@ -237,7 +235,6 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
       XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
 
       dynamicsWorld->addConstraint(XZplaneConstraint);
-      XZplaneConstraint->setDbgDrawSize(btScalar(5.f));
    }
 
 
