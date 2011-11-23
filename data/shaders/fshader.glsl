@@ -1,4 +1,5 @@
 varying vec4 color;
+varying vec2 texCoord;
 
 // per-fragment interpolated values from the vertex shader
 varying  vec4 fN;
@@ -13,11 +14,13 @@ varying float shiny;
 // drawmode values
 // GL_TRIANGLES : 0
 // GL_LINES     : 1
+// GL_TEXTURES  : 2
 uniform  int drawmode;
+uniform sampler2D texture;
 
 void main() 
 { 
-   if ( drawmode != 1 )
+   if ( drawmode == 0 )
    {
       // Normalize the input lighting vectors
       vec3 N = normalize(fN.xyz);
@@ -41,9 +44,12 @@ void main()
       // limit values between 0.0 and 1.0 (prevents overbright)
       gl_FragColor = clamp(ambient + diff + spec,0.0,1.0);
    }
-   else
+   else if ( drawmode == 1 )
    {
       gl_FragColor = diffuse;
+   }
+   else{
+      gl_FragColor = texture2D( texture, texCoord );
    }
 } 
 

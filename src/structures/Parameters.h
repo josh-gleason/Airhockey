@@ -128,6 +128,8 @@ class Parameters{
       vec2 paddle1_dest;
       vec2 paddle2_dest;
 
+      GLuint view_mode;
+
       void set_paddle1_dest(vec2 dest);
       void set_paddle2_dest(vec2 dest);
 
