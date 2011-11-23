@@ -76,7 +76,9 @@ class Scoreboard{
       GLuint program;
       GLuint vPosition;
       GLuint vTexCoord; 
-      
+      GLuint buffer;
+      GLuint drawmode;
+
       GLuint texture;
 
       GLuint num_points_main;

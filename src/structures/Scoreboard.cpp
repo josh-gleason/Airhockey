@@ -85,11 +85,13 @@ void Scoreboard::make_empty(){
 
 void Scoreboard::init( const GLuint& prog ){
    
+   // Load shaders and use the resulting shader program
+   program = prog;
    
    //read image from file
    img_data = read_image( "data/characters_flip.ppm" );
-
-
+   
+   cout << "Image Size: " << img_cols << ", " << img_rows << endl;
    /*********************************/
    /*       High Score Banner       */
    /*********************************/
@@ -98,10 +100,13 @@ void Scoreboard::init( const GLuint& prog ){
    tex_coords_main = NULL;
    vec4 tl_tex(-0.75, 0.3, 0, 1);
    vec4 br_tex( 0.75,-0.3, 0, 1);
-   build_texture_values( tl_tex, br_tex, string("HIGH SCORES"), points_main, tex_coords_main, vex_size_main, tex_size_main);
+   build_texture_values( tl_tex, br_tex, string("A"), points_main, tex_coords_main, vex_size_main, tex_size_main);
+  
+   for(int i=0; i<6; i++)
+      cout << points_main[i] << ", " << tex_coords_main[i] << endl;
    
    num_points_main = tex_size_main/sizeof(vec2);
-
+   
    // Initialize texture objects
    glGenTextures( 1, &texture );
    
@@ -139,7 +144,6 @@ void Scoreboard::init( const GLuint& prog ){
    #endif
 
    // Create and initialize a buffer object
-   GLuint buffer;
    glGenBuffers( 1, &buffer );
    glBindBuffer( GL_ARRAY_BUFFER, buffer );
    glBufferData( GL_ARRAY_BUFFER, vex_size_main + tex_size_main, NULL, GL_STATIC_DRAW );
@@ -153,10 +157,6 @@ void Scoreboard::init( const GLuint& prog ){
 
    glBufferSubData( GL_ARRAY_BUFFER, offset, tex_size_main, tex_coords_main );
 
-   // Load shaders and use the resulting shader program
-   program = prog;
-   glUseProgram( program );
-
    // set up vertex arrays
    offset = 0;
    GLuint vPosition = glGetAttribLocation( program, "vPosition" );
@@ -168,6 +168,7 @@ void Scoreboard::init( const GLuint& prog ){
    glEnableVertexAttribArray( vTexCoord );
    glVertexAttribPointer( vTexCoord, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(offset) );
 
+   drawmode = glGetUniformLocation( program, "drawmode");
    glEnable( GL_DEPTH_TEST );
 
 }
@@ -175,13 +176,17 @@ void Scoreboard::init( const GLuint& prog ){
 
 
 void Scoreboard::draw_shape(  ){
-
-   glUseProgram(program);
+   
 #ifdef __APPLE__
    glBindVertexArrayAPPLE( vao );
 #else
    glBindVertexArray( vao ); 
 #endif
+   
+   glUniform1i( drawmode, 2 );
+   
+   glBindBuffer( GL_ARRAY_BUFFER, buffer );
+   glBindTexture( GL_TEXTURE_2D, texture );
    glDrawArrays( GL_TRIANGLES, 0, num_points_main );
 
 

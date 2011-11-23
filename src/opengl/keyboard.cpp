@@ -99,6 +99,14 @@ void keyboardPress( unsigned char key, int x, int y ){
    btVector3 distance;
 
    switch( key ){
+      
+      /**********************************/
+      /*       Change the view mode     */
+      /**********************************/
+      case '8':
+         if( options.view_mode == 0 ) options.view_mode = 1;
+         else options.view_mode = 0;
+         break;
       /********************************/
       /*         Switch padle         */
       /********************************/
