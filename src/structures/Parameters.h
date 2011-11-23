@@ -80,6 +80,9 @@ class Parameters{
       /** Anchor for shape initial is set */
       //int mouse_anchor;
 
+      // set the paddles shape
+      void set_paddle_shape( PaddleType shape );
+
       int x_beg, y_beg, x_cur, y_cur;
 
       GLfloat aspect;
@@ -113,14 +116,24 @@ class Parameters{
       unsigned int cam_timerStep;
 
       Object* board;
-      Object* paddle1;
-      Object* paddle2;
       Object* puck;
+
+      Object* paddle1;  // these are pointers to another paddle (dont allocate/delete)
+      Object* paddle2;  // "
+
+      Object* round1;   // allocate these
+      Object* round2;
+      Object* tri1;
+      Object* tri2;
+      Object* sqr1;
+      Object* sqr2;
 
       GLfloat pdl_moveStep;
       GLfloat pdl_timerStep;
       btScalar pdl1_maxVelocity;
       btScalar pdl2_maxVelocity;
+
+      PaddleType pdl_shape;
 
       // the destination that the paddles attempt to move to in (x,z) coords
       vec2 paddle1_dest;

@@ -80,14 +80,24 @@ void init()
    options.board = new Object("data/models/Airhockey.obj", 0.5, options.program);
    Object walls("data/models/walls.obj", 0.5, options.program);   // for physics
    options.puck = new Object("data/models/Puck.obj", 0.2, options.program);
-   options.paddle1 = new Object("data/models/Paddle.obj", 0.2, options.program);
-   options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   options.round1 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   options.round2 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   options.tri1 = new Object("data/models/Paddle_Triangle2.obj", 0.2, options.program);
+   options.tri2 = new Object("data/models/Paddle_Triangle2.obj", 0.2, options.program);
+   options.sqr1 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
+   options.sqr2 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
 
    options.board->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false );  // dont load shader
    options.puck->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
-   options.paddle1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
-   options.paddle2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
+   options.round1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular); // rotate 180 deg
+   options.round2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
+   options.tri1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, true, 180.0 ); // rotate 180 deg
+   options.tri2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
+   options.sqr1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular); // rotate 180 deg
+   options.sqr2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
+
+   options.set_paddle_shape(Parameters::ROUND);
 
    //set initial object positions
    options.paddle1->adjust_translation( vec3(-3.0, 0.0, 0.0));

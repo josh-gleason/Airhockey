@@ -99,7 +99,18 @@ void keyboardPress( unsigned char key, int x, int y ){
    btVector3 distance;
 
    switch( key ){
-      
+      /********************************/
+      /*         Switch padle         */
+      /********************************/
+      case 'z':
+         options.set_paddle_shape(Parameters::ROUND);
+         break;
+      case 'x':
+         options.set_paddle_shape(Parameters::TRIANGLE);
+         break;
+      case 'c':
+         options.set_paddle_shape(Parameters::SQUARE);
+         break;
       /********************************/
       /*         Light Actions        */
       /********************************/

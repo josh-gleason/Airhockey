@@ -39,7 +39,7 @@ void Object::make_empty(){
 }
 
 
-void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_diff, const vec4& l_spec, bool load_shader){
+void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_diff, const vec4& l_spec, bool load_shader, int rotate){
 
 
    //load data from model
@@ -47,6 +47,8 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
 
    //load model sizes
    vertex_count = model_data.faceCount*3;
+   
+   radians = rotate * M_PI / 180.0;
    
    //compute shininess and vertex array size
 #ifdef DEBUG_DRAW_NORMALS
@@ -212,19 +214,24 @@ vec3 Object::get_centroid()const{
 
 void Object::build_arrays( const vec4& lpos, const vec4& l_amb, const vec4& l_dif, const vec4& l_spec ){
 
+   mat4 rotate(cos(radians),  0.0, sin(radians), 0.0,
+               0.0,           1.0, 0.0,          0.0,
+               -sin(radians), 0.0, cos(radians), 0.0,
+               0.0,           0.0, 0.0,          1.0);
+
    // copy vertex info into vertices and colors
    for ( int i = 0; i < model_data.faceCount; ++i )
    {
       obj_face *o = model_data.faceList[i];
       for ( int j = 0; j < 3; ++j )
       {
-         vertices[3*i+j] = 
+         vertices[3*i+j] = rotate*
                vec4(model_data.vertexList[o->vertex_index[j]]->e[0]*scale_factor,
                     model_data.vertexList[o->vertex_index[j]]->e[1]*scale_factor,
                     model_data.vertexList[o->vertex_index[j]]->e[2]*scale_factor,
                     1.0);
 
-         normals[3*i+j] = 
+         normals[3*i+j] = rotate*
                vec4( model_data.normalList[o->normal_index[j]]->e[0],
                      model_data.normalList[o->normal_index[j]]->e[1],
                      model_data.normalList[o->normal_index[j]]->e[2],

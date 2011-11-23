@@ -23,12 +23,18 @@ class Physics_Model{
       btCollisionShape* paddle1Shape;
       btCollisionShape* paddle2Shape;
 
+      btCollisionShape* paddle1Circle;
+      btCollisionShape* paddle1Triangle;
+      btCollisionShape* paddle1Square;
+      btCollisionShape* paddle2Circle;
+      btCollisionShape* paddle2Triangle;
+      btCollisionShape* paddle2Square;
+
       btRigidBody* puckRigidBody;
       btRigidBody* boardRigidBody;
       btRigidBody* paddle1RigidBody;
       btRigidBody* paddle2RigidBody;
       btDiscreteDynamicsWorld* dynamicsWorld;
-      
       
       btTransform puck_trans;
       btTransform paddle1_trans;
