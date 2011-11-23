@@ -68,7 +68,7 @@ ifeq ($(shell uname),Linux)
   OPENGL_LIBS    = -lglut -lGLU -lGL -lGLEW
   OPENGL_INCLUDE =
   BULLET_INCLUDE = `pkg-config bullet --cflags`
-  BULLET_LIBS    = `pkg-config bullet --libs`
+  BULLET_LIBS    = -L/home/ee/gleason/local/lib `pkg-config bullet --libs`
 else  # Apple
   BOOST_LIBS     = -L/opt/local/lib -lboost_system -lboost_filesystem \
                    -lboost_program_options
