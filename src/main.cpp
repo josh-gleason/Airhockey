@@ -90,8 +90,8 @@ void init()
    options.sqr2 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
 
    // for more physics
-   options.physics.tri1_walls = new Object("data/models/Triangle1_walls.mtl", 0.2, options.program);
-   options.physics.tri2_walls = new Object("data/models/Triangle1_walls.mtl", 0.2, options.program);
+   options.physics.tri1_walls = new Object("data/models/Triangle1_walls.obj", 0.2, options.program);
+   options.physics.tri2_walls = new Object("data/models/Triangle1_walls.obj", 0.2, options.program);
 
    // these need to reference something to start but have to be "set" after physics
    options.paddle1 = options.round1;

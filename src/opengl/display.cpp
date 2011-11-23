@@ -22,10 +22,10 @@ void display_function( void )
       glRasterPos3f( 3.58,.2, 0.1);
       glColor3f(1,1,1);
       name = "Player 2 Score: ";
-      for(size_t i=0; i<name.size(); i++)
-         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , name[i] );
-      for(size_t i=0; i<p2.size(); i++)
-         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , p2[i] );
+//      for(size_t i=0; i<name.size(); i++)
+//         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , name[i] );
+//      for(size_t i=0; i<p2.size(); i++)
+//         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , p2[i] );
       glPopMatrix();
 
       ///player1 board
@@ -38,10 +38,10 @@ void display_function( void )
       glRasterPos3f(-3.58,.2, 0.1);
       glColor3f(1,1,1);
       name = "Player 1 Score: ";
-      for(size_t i=0; i<name.size(); i++)
-         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , name[i] );
-      for(size_t i=0; i<p1.size(); i++)
-         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , p1[i] );
+//      for(size_t i=0; i<name.size(); i++)
+//         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , name[i] );
+//      for(size_t i=0; i<p1.size(); i++)
+//         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24 , p1[i] );
       glPopMatrix();
 
 

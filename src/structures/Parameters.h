@@ -102,6 +102,8 @@ class Parameters{
 
       int x_beg, y_beg, x_cur, y_cur;
 
+      int timed_pause;
+
       GLfloat aspect;
 
       string filename;

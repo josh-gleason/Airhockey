@@ -2,6 +2,8 @@
 
 Parameters::Parameters( ){
    
+   timed_pause = 0;
+
    p1_wins = 0;
    p2_wins = 0;
    winner = NULL;
@@ -114,7 +116,6 @@ void Parameters::set_paddle2_dest(vec2 dest){
 
 void Parameters::set_paddle_shape( PaddleType shape )
 {
-   std::cout << "CHANGING" << std::endl;
    physics.dynamicsWorld->removeConstraint(physics.pdl1XZplaneConstraint);
    physics.dynamicsWorld->removeRigidBody(physics.paddle1RigidBody);
    delete physics.paddle1RigidBody;

@@ -7,6 +7,14 @@
 
 void timerHandle( int state ){
 
+   // timed pause length
+   if( options.timed_pause > 0 )
+   {
+     options.timed_pause--;
+     glutTimerFunc( 17, &timerHandle, 0);
+     return;
+   }
+
    if( options.view_mode == 0 ){
       //step simulation
       options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
@@ -207,12 +215,12 @@ void timerHandle( int state ){
          ob = true;
       }
       else if ( puck_pos.z < 0.374856f && puck_pos.z > -0.374856f ) {  // scoring possible
-         if ( puck_pos.x > 4 )
+         if ( puck_pos.x > 3.6 )
             p1scored = true;
-         else if ( puck_pos.x < -4 )
+         else if ( puck_pos.x < -3.6 )
             p2scored = true;
       }
-      else if ( puck_pos.x > 4 || puck_pos.x < -4 ) {  // ob
+      else if ( puck_pos.x > 3.6 || puck_pos.x < -3.6 ) {  // ob
          ob = true;
       }
 
@@ -223,8 +231,7 @@ void timerHandle( int state ){
          //set puck position (and add scores)
          if ( p2scored )
          {
-            std::cout << "PLAYER 2 SCORED" << std::endl;
-            options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
+            options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
             options.p2_score++;
             options.hud.p2_score(options.p2_score);
             if( options.p2_score > 3 ){
@@ -239,8 +246,7 @@ void timerHandle( int state ){
          }
          else if ( p1scored )
          {
-            std::cout << "PLAYER 1 SCORED" << std::endl;
-            options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
+            options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(1.2, 0, 0)));
             options.p1_score++;
             options.hud.p1_score(options.p1_score);
             
@@ -256,7 +262,6 @@ void timerHandle( int state ){
          }
          else if ( ob )
          {
-            std::cout << "OB" << std::endl;
             options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(0, 0, 0)));
          }
 
@@ -308,6 +313,8 @@ void timerHandle( int state ){
          options.physics.puckRigidBody->setLinearVelocity(  btVector3(0.0,0.0,0.0));
          options.physics.puckRigidBody->setAngularVelocity( btVector3(0.0,0.0,0.0));
 
+         // pause for 50/60 of a second
+         options.timed_pause = 50;
       }
    }
 
