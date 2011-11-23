@@ -73,6 +73,47 @@ Scoreboard::~Scoreboard( ){
 
    make_empty();
 
+   ofstream fout;
+   
+   string name, tname;
+   int temp;
+   if( p1w > sc3 || p2w > sc3 ){
+      cout << "Please enter a three letter name for the record books" << endl;
+      cin >> name;
+      usr3 = name; 
+   
+      if( p1w > p2w ){
+         sc3 = p1w;
+      }
+      else{
+         sc3 = p2w;
+      }
+
+      if(sc3 > sc2){
+         temp = sc3;
+         sc3 = sc2;
+         sc2 = temp;
+         tname = usr3;
+         usr3 = usr2;
+         usr2 = tname; 
+      }
+      if(sc2 > sc1){
+         temp = sc2;
+         sc2 = sc1;
+         sc1 = temp;
+         tname = usr2;
+         usr2 = usr1;
+         usr1 = tname; 
+      }
+   }
+   
+   fout.open("data/scores.txt");
+   fout << usr1 << "  " << sc1 << endl;
+   fout << usr2 << "  " << sc2 << endl;
+   fout << usr3 << "  " << sc3 << endl;
+   fout.close();
+
+
 }
 
 void Scoreboard::make_empty(){
@@ -82,6 +123,10 @@ void Scoreboard::make_empty(){
       delete [] tex_coords_main;
 }
 
+void Scoreboard::win_count( const int p1, const int p2 ){
+   p1w = p1;
+   p2w = p2;
+}
 
 void Scoreboard::init( const GLuint& prog ){
    
@@ -91,8 +136,6 @@ void Scoreboard::init( const GLuint& prog ){
    //read image from file
    img_data = read_image( "data/characters_flip.ppm" );
    
-   string usr1, usr2, usr3, scp1, scp2, scp3;
-   int sc1, sc2, sc3;
    ifstream fin;
    fin.open("data/scores.txt");
    fin >> usr1 >> sc1 >> usr2 >> sc2 >> usr3 >> sc3;

@@ -64,6 +64,7 @@ class Scoreboard{
       void init( GLuint const& prog );
 
       void draw_shape( );
+      void win_count( const int p1, const int p2);
 
    private:
 
@@ -106,6 +107,11 @@ class Scoreboard{
       vec4 * points_p3;        //list of vertices (PLAYER 3)
       vec2 * tex_coords_p3;    //list of texture coordinates (PLAYER 3)
       
+      string usr1, usr2, usr3, scp1, scp2, scp3;
+      int sc1, sc2, sc3;
+     
+      int p1w, p2w;
+
       GLfloat z_dist;
       float z_trans;
       

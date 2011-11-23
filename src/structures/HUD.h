@@ -67,6 +67,8 @@ class HUD{
 
       void p1_score( const GLuint& score );
       void p2_score( const GLuint& score );
+      void p1_win( const GLuint& score );
+      void p2_win( const GLuint& score );
 
    private:
 
@@ -113,6 +115,20 @@ class HUD{
       vec4 * points_p2s;
       vec2 * texture_p2s;
       
+      GLuint player1_wins;
+      GLuint num_points_p1w;
+      GLuint vex_size_p1w;
+      GLuint tex_size_p1w;
+      vec4 * points_p1w;
+      vec2 * texture_p1w;
+      
+      GLuint player2_wins;
+      GLuint num_points_p2w;
+      GLuint vex_size_p2w;
+      GLuint tex_size_p2w;
+      vec4 * points_p2w;
+      vec2 * texture_p2w;
+
       GLfloat z_dist;
       float z_trans;
 

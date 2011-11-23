@@ -247,7 +247,8 @@ void Winner::init( const GLuint& prog, bool const& winner ){
 }
 
 void Winner::draw_shape(  ){
-
+   
+   cout << "INSIDE WINNER" << endl;
 #ifdef __APPLE__
    glBindVertexArrayAPPLE( vao );
 #else
