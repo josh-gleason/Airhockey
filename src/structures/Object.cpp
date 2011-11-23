@@ -171,7 +171,6 @@ void Object::init_buffers( const vec4& lpos, const vec4& l_amb, const vec4& l_di
    rotation_id = glGetUniformLocation( program, "rotation" );
 
    translation = vec4(0,0,0,1);
-   rotation = 0.0;
 }
 
 void Object::draw_shape( mat4 const& worldviewMat, mat4 const& proj, vec4 const& l_pos ){
@@ -184,7 +183,7 @@ void Object::draw_shape( mat4 const& worldviewMat, mat4 const& proj, vec4 const&
 #endif
    
    glUniform4fv( translation_id, 1, translation );
-   glUniform1f( rotation_id, rotation );
+   glUniformMatrix4fv( rotation_id, 1, GL_TRUE, rotation );
    glUniform4fv( light_position,   1, l_pos );
    glUniformMatrix4fv( projection, 1, GL_TRUE, proj );
    glUniformMatrix4fv( worldview, 1, GL_TRUE, worldviewMat);
@@ -304,15 +303,15 @@ void Object::adjust_translation( const vec3& motion ){
    translation.z += motion.z;
 }
 
-void Object::adjust_rotation( GLfloat radians ){
-   rotation += radians;
+void Object::adjust_rotation( const mat4& rotMat ){
+   rotation = rotMat*rotation;
 }
 
-void Object::set_rotation( GLfloat rot ){
-   rotation = rot;
+void Object::set_rotation( const mat4& rotMat ){
+   rotation = rotMat;
 }
 
-GLfloat Object::get_rotation(){
+const mat4& Object::get_rotation() const{
    return rotation;
 }
 

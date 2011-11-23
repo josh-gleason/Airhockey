@@ -14,7 +14,7 @@ uniform mat4 worldview;
 
 uniform mat4 projection; 
 uniform vec4 translation;
-uniform float rotation;
+uniform mat4 rotation;
 uniform vec4 light_position;
 uniform  int drawmode;
 
@@ -36,11 +36,7 @@ void main()
       mat4( 1.0, 0.0, 0.0, 0.0,
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
-            translation.x, translation.y, translation.z, 1.0) *
-      mat4( cos(rotation), 0.0, -sin(rotation), 0.0,
-            0.0,           1.0, 0.0,            0.0,
-            sin(rotation), 0.0, cos(rotation),  0.0,
-            0.0,           0.0, 0.0,            1.0);
+            translation.x, translation.y, translation.z, 1.0) * rotation;
 
       // put vertex into world coordinates
       gl_Position = modelworld * vPosition;
