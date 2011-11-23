@@ -35,7 +35,11 @@ class Physics_Model{
       btRigidBody* paddle1RigidBody;
       btRigidBody* paddle2RigidBody;
       btDiscreteDynamicsWorld* dynamicsWorld;
-      
+     
+      btGeneric6DofConstraint *puckXZplaneConstraint;
+      btGeneric6DofConstraint *pdl1XZplaneConstraint;
+      btGeneric6DofConstraint *pdl2XZplaneConstraint;
+
       btTransform puck_trans;
       btTransform paddle1_trans;
       btTransform paddle2_trans;

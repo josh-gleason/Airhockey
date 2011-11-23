@@ -114,21 +114,118 @@ void Parameters::set_paddle2_dest(vec2 dest){
 
 void Parameters::set_paddle_shape( PaddleType shape )
 {
+   std::cout << "CHANGING" << std::endl;
+   physics.dynamicsWorld->removeConstraint(physics.pdl1XZplaneConstraint);
+   physics.dynamicsWorld->removeRigidBody(physics.paddle1RigidBody);
+   delete physics.paddle1RigidBody;
+   delete physics.pdl1XZplaneConstraint;
+
+   physics.dynamicsWorld->removeConstraint(physics.pdl2XZplaneConstraint);
+   physics.dynamicsWorld->removeRigidBody(physics.paddle2RigidBody);
+   delete physics.paddle2RigidBody;
+   delete physics.pdl2XZplaneConstraint;
+
+   // change model and collision info
    if ( shape == ROUND ) {
       paddle1 = round1;
       paddle2 = round2;
 
-      //paddle1Shape
+      physics.paddle1Shape = physics.paddle1Circle;
+      physics.paddle2Shape = physics.paddle2Circle;
 
    } else if ( shape == TRIANGLE ) {
       paddle1 = tri1;
       paddle2 = tri2;
+
+      physics.paddle1Shape = physics.paddle1Triangle;
+      physics.paddle2Shape = physics.paddle2Triangle;
+
    } else if ( shape == SQUARE ) {
       paddle1 = sqr1;
       paddle2 = sqr2;
+      
+      physics.paddle1Shape = physics.paddle1Square;
+      physics.paddle2Shape = physics.paddle2Square;
    }
+   
+   //////////// PADDLE 1 ////////////////////////////////////////////////////////////
+   // create new rigid body
+      
+   btVector3 paddle1Inertia(0,0,0);
+   physics.paddle1Shape->calculateLocalInertia( physics.pdl_mass, paddle1Inertia );
 
-   // TODO: change some other things here
+   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI(
+         physics.pdl_mass,
+         physics.paddle1MotionState,
+         physics.paddle1Shape,
+         paddle1Inertia );
+
+   physics.paddle1RigidBody = new btRigidBody( paddle1RigidBodyCI );
+   paddle1RigidBodyCI.m_friction = physics.pdl_friction;
+   paddle1RigidBodyCI.m_restitution = physics.pdl_restitution;
+
+   physics.dynamicsWorld->addRigidBody( physics.paddle1RigidBody );
+
+   physics.paddle1RigidBody->setActivationState(DISABLE_DEACTIVATION);
+   physics.paddle1RigidBody->setLinearFactor(btVector3(1,0,1));
+
+   btTransform frameInB1 = btTransform::getIdentity();
+   frameInB1.setOrigin(btVector3(0.0,0.0,0.0));
+
+   physics.pdl1XZplaneConstraint = new btGeneric6DofConstraint(
+         *physics.paddle1RigidBody,
+         frameInB1,
+         true);
+      
+   // lock the Y axis movement
+   physics.pdl1XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+   physics.pdl1XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+
+   // lock the X, Z, rotations
+   physics.pdl1XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+   physics.pdl1XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+
+   physics.dynamicsWorld->addConstraint(physics.pdl1XZplaneConstraint);
+   
+   //////////// PADDLE 2 ////////////////////////////////////////////////////////////
+   // create new rigid body
+      
+   btVector3 paddle2Inertia(0,0,0);
+   physics.paddle2Shape->calculateLocalInertia( physics.pdl_mass, paddle2Inertia );
+
+   btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI(
+         physics.pdl_mass,
+         physics.paddle2MotionState,
+         physics.paddle2Shape,
+         paddle2Inertia );
+
+   physics.paddle2RigidBody = new btRigidBody( paddle2RigidBodyCI );
+   paddle2RigidBodyCI.m_friction = physics.pdl_friction;
+   paddle2RigidBodyCI.m_restitution = physics.pdl_restitution;
+
+   physics.dynamicsWorld->addRigidBody( physics.paddle2RigidBody );
+
+   physics.paddle2RigidBody->setActivationState(DISABLE_DEACTIVATION);
+   physics.paddle2RigidBody->setLinearFactor(btVector3(1,0,1));
+
+   btTransform frameInB2 = btTransform::getIdentity();
+   frameInB2.setOrigin(btVector3(0.0,0.0,0.0));
+
+   physics.pdl2XZplaneConstraint = new btGeneric6DofConstraint(
+         *physics.paddle2RigidBody,
+         frameInB2,
+         true);
+      
+   // lock the Y axis movement
+   physics.pdl2XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+   physics.pdl2XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+
+   // lock the X, Z, rotations
+   physics.pdl2XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+   physics.pdl2XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+
+   physics.dynamicsWorld->addConstraint(physics.pdl2XZplaneConstraint);
+   
 }
 
 void Parameters::rotate(  ){

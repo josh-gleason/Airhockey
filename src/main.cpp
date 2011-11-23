@@ -89,6 +89,10 @@ void init()
    options.sqr1 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
    options.sqr2 = new Object("data/models/Paddle_Square.obj", 0.2, options.program);
 
+   // these need to reference something to start but have to be "set" after physics
+   options.paddle1 = options.round1;
+   options.paddle2 = options.round2;
+
    options.board->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false );  // dont load shader
    options.puck->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
@@ -98,8 +102,6 @@ void init()
    options.tri2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    options.sqr1->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular); // rotate 180 deg
    options.sqr2->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
-
-   options.set_paddle_shape(Parameters::ROUND);
 
    //set initial object positions
    options.paddle1->adjust_translation( vec3(-3.0, 0.0, 0.0));
@@ -138,6 +140,10 @@ void init()
 
 
    enableAI();
+   
+   // set paddles here (even though shapes were set above)
+   options.set_paddle_shape(Parameters::ROUND);
+
    /***************************************/
    /*          Texture Mapping            */
    /***************************************/

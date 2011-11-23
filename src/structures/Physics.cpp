@@ -29,15 +29,18 @@ Physics_Model::Physics_Model(){
    paddle1Shape = NULL;
    paddle2Shape = NULL;
    paddle1Circle = NULL;
-   paddle1Circle = NULL;
-   paddle1Circle = NULL;
-   paddle1Circle = NULL;
-   paddle1Circle = NULL;
-   paddle1Circle = NULL;
+   paddle2Circle = NULL;
+   paddle1Square = NULL;
+   paddle2Square = NULL;
+   paddle1Triangle = NULL;
+   paddle2Triangle = NULL;
    puckRigidBody = NULL;
    boardRigidBody = NULL;
    paddle1RigidBody = NULL;
    paddle2RigidBody = NULL;
+   puckXZplaneConstraint = NULL;
+   pdl1XZplaneConstraint = NULL;
+   pdl2XZplaneConstraint = NULL;
    collisionConfiguration = NULL;
    dispatcher = NULL;
    overlappingPairCache = NULL;
@@ -66,6 +69,10 @@ Physics_Model::~Physics_Model()
    if ( boardRigidBody ) delete boardRigidBody;
    if ( paddle1RigidBody ) delete paddle1RigidBody;
    if ( paddle2RigidBody ) delete paddle2RigidBody;
+
+   if ( puckXZplaneConstraint ) delete puckXZplaneConstraint;
+   if ( pdl1XZplaneConstraint ) delete pdl1XZplaneConstraint;
+   if ( pdl2XZplaneConstraint ) delete pdl2XZplaneConstraint;
 
    if ( collisionConfiguration ) delete collisionConfiguration;
    if ( dispatcher ) delete dispatcher;
@@ -171,21 +178,21 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
       btTransform frameInB = btTransform::getIdentity();
       frameInB.setOrigin(btVector3(0.0,0.01,0.0));
 
-      btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *puckRigidBody,frameInB, true );
+      puckXZplaneConstraint = new btGeneric6DofConstraint( *puckRigidBody,frameInB, true );
 
       // lowerlimit = upperlimit --> axis locked
       // lowerlimit < upperlimit --> motion limited between values
       // lowerlimit > upperlimit --> axis is free
 
       // lock the Y axis movement
-      XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
-      XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+      puckXZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+      puckXZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
 
       // lock the X, Z, rotations
-      XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
-      XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+      puckXZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+      puckXZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
 
-      dynamicsWorld->addConstraint(XZplaneConstraint);
+      dynamicsWorld->addConstraint(puckXZplaneConstraint);
    }
 
    /******************************************/
@@ -221,21 +228,21 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
       btTransform frameInB = btTransform::getIdentity();
       frameInB.setOrigin(btVector3(0.0,0.0,0.0));
 
-      btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *paddle1RigidBody,frameInB, true );
+      pdl1XZplaneConstraint = new btGeneric6DofConstraint( *paddle1RigidBody,frameInB, true );
 
       // lowerlimit = upperlimit --> axis locked
       // lowerlimit < upperlimit --> motion limited between values
       // lowerlimit > upperlimit --> axis is free
 
       // lock the Y axis movement
-      XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
-      XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+      pdl1XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+      pdl1XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
 
       // lock the X, Z, rotations
-      XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
-      XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+      pdl1XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+      pdl1XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
 
-      dynamicsWorld->addConstraint(XZplaneConstraint);
+      dynamicsWorld->addConstraint(pdl1XZplaneConstraint);
    }
 
 
@@ -272,21 +279,21 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
       btTransform frameInB = btTransform::getIdentity();
       frameInB.setOrigin(btVector3(0.0,0.0,0.0));
 
-      btGeneric6DofConstraint *XZplaneConstraint = new btGeneric6DofConstraint( *paddle2RigidBody,frameInB, true );
+      pdl2XZplaneConstraint = new btGeneric6DofConstraint( *paddle2RigidBody,frameInB, true );
 
       // lowerlimit = upperlimit --> axis locked
       // lowerlimit < upperlimit --> motion limited between values
       // lowerlimit > upperlimit --> axis is free
 
       // lock the Y axis movement
-      XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
-      XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
+      pdl2XZplaneConstraint->setLinearLowerLimit( btVector3(1,0,1));
+      pdl2XZplaneConstraint->setLinearUpperLimit( btVector3(0,0,0));
 
       // lock the X, Z, rotations
-      XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
-      XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
+      pdl2XZplaneConstraint->setAngularLowerLimit(btVector3(0,1,0));
+      pdl2XZplaneConstraint->setAngularUpperLimit(btVector3(0,0,0));
 
-      dynamicsWorld->addConstraint(XZplaneConstraint);
+      dynamicsWorld->addConstraint(pdl2XZplaneConstraint);
    }
 
 
