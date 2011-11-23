@@ -61,7 +61,7 @@ class HUD{
       
       void make_empty();
 
-      void init( GLuint const& prog, string const& p2name, string const& p2name );
+      void init( GLuint const& prog, string const& p1name, string const& p2name );
 
       void draw_shape( );
 
