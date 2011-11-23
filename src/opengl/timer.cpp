@@ -12,19 +12,31 @@ void timerHandle( int state ){
       options.physics.dynamicsWorld->stepSimulation(1.f/60.f,10);
       vec3 motion;
 
-      //keep constant upward force on puck and paddles
-      btVector3 force = btVector3(0,0.5,0);
-      options.physics.puckRigidBody->applyCentralForce(force); 
-      //options.physics.paddle1RigidBody->applyCentralForce(force); 
-      //options.physics.paddle2RigidBody->applyCentralForce(force); 
-
-
-
       /*********************/
       /*       Puck        */
       /*********************/
       //get an update of the motion state
       options.physics.puckRigidBody->getMotionState()->getWorldTransform( options.physics.puck_trans );
+
+      btMatrix3x3 rotation = options.physics.puck_trans.getBasis();
+
+      mat4 rotMat(rotation[0][0],rotation[0][1],rotation[0][2],0.0,
+                  rotation[1][0],rotation[1][1],rotation[1][2],0.0,
+                  rotation[2][0],rotation[2][1],rotation[2][2],0.0,
+                  0.0,           0.0,           0.0,           1.0);
+
+      btQuaternion rot = options.physics.puck_trans.getRotation();
+
+      std::cout << "W: " << rot.getW();
+      std::cout << "  X,Y,Z: (" << rot.getAxis().getX() << ", " << rot.getAxis().getY() << ", " << rot.getAxis().getZ() << ")" << std::endl;
+
+      options.puck->set_rotation( rotMat );
+
+      //load new position into structure for puck model
+      motion = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());
+
+      //push new position into puck
+      options.puck->set_translation( motion );
 
       //load new position into structure for puck model
       motion = vec3( options.physics.puck_trans.getOrigin().getX(), options.physics.puck_trans.getOrigin().getY(), options.physics.puck_trans.getOrigin().getZ());

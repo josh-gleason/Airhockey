@@ -35,6 +35,10 @@ class Object{
       void set_translation( const vec3& trans);
       void adjust_translation( const vec3& motion );
 
+      void adjust_rotation( const mat4& rotMat );
+      void set_rotation( const mat4& rotMat );
+      const mat4& get_rotation() const;
+
       // return const reference so that no copies are made
       const vec4& get_velocity()const;
 
@@ -65,6 +69,7 @@ class Object{
       GLuint projection;
       GLuint light_position;
       GLuint drawmode;
+      GLuint rotation_id;
 
       string model_name;
       objLoader model_data;
@@ -81,6 +86,7 @@ class Object{
       GLfloat* shininess;
 
       vec4 translation;
+      mat4 rotation;
       vec4 velocity;
 
       // no need for scaleing or rotation

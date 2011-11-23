@@ -120,11 +120,11 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    paddle1Circle = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
 
    // TODO
-   //paddle1Triangle = new btCylinderShape(btVector3(btScalar(paddleSize.x),btScalar(0.1),btScalar(paddle1Size.x)));
+   //paddle1Triangle = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
 
-   //paddle1Square = new btBoxShape(btVector3(btScalar(paddleSize.x), btScalar(0.1), btScalar(paddle1Size.x)));
+   paddle1Square = new btBoxShape(btVector3(btScalar(paddle1Size.x), btScalar(0.1), btScalar(paddle1Size.x)));
 
-   paddle1Shape = paddle1Circle;
+   paddle1Shape = paddle1Square;
 
    //build motion state (PADDLE1)
    paddle1MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle1Cent.x,0.0, paddle1Cent.z)));
@@ -147,6 +147,16 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    /******************************************/
    ///build paddle2 collision model
    paddle2Shape = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
+   
+   ///build paddle2 collision model
+   paddle2Circle = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
+
+   // TODO
+   //paddle2Triangle = new btCylinderShape(btVector3(btScalar(paddle2Size.x),btScalar(0.1),btScalar(paddle2Size.x)));
+
+   paddle2Square = new btBoxShape(btVector3(btScalar(paddle2Size.x), btScalar(0.1), btScalar(paddle2Size.x)));
+
+   paddle2Shape = paddle2Square;
 
    //build motion state (PADDLE2)
    paddle2MotionState = new btDefaultMotionState( btTransform(btQuaternion(0,0,0,1), btVector3( paddle2Cent.x,0.0, paddle2Cent.z)));
