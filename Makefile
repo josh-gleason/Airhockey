@@ -32,18 +32,11 @@ HEADER_FILES  = $(MATH)/mat \
 OBJECT_NAMES  = $(CORE)/parser \
                 $(STRUCTURES)/Parameters \
                 $(STRUCTURES)/Camera \
-<<<<<<< HEAD
 					 $(STRUCTURES)/Light \
 					 $(STRUCTURES)/Object \
 					 $(STRUCTURES)/Physics \
 					 $(STRUCTURES)/Scoreboard \
 					 $(MATH)/vector \
-=======
-                $(STRUCTURES)/Light \
-                $(STRUCTURES)/Object \
-                $(STRUCTURES)/Physics \
-                $(MATH)/vector \
->>>>>>> 7331067a903c35882bb0779ca80ccb8753ac180d
                 $(MATH)/triangulation \
                 $(OPENGL)/display \
                 $(OPENGL)/initialization \
