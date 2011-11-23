@@ -80,13 +80,8 @@ void init()
    options.board = new Object("data/models/Airhockey.obj", 0.5, options.program);
    Object walls("data/models/walls.obj", 0.5, options.program);   // for physics
    options.puck = new Object("data/models/Puck.obj", 0.2, options.program);
-   if ( options.pdl_high_quality_model ) {
-      options.paddle1 = new Object("data/models/Paddle.obj", 0.2, options.program);
-      options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
-   } else {
-      options.paddle1 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
-      options.paddle2 = new Object("data/models/Paddle_LowRes.obj", 0.2, options.program);
-   }
+   options.paddle1 = new Object("data/models/Paddle.obj", 0.2, options.program);
+   options.paddle2 = new Object("data/models/Paddle.obj", 0.2, options.program);
 
    options.board->init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular);
    walls.init_buffers( options.light.m_position, options.light.m_ambient, options.light.m_diffuse, options.light.m_specular, false );  // dont load shader
@@ -151,6 +146,8 @@ int main( int argc, char **argv )
         << "=================== lighting model ==============" << endl 
         << " n - move light -z axis   m - move light +z axis " << endl
         << " , - move light -x axis   . - move light +x axis " << endl
+        << "=================== change paddle  ==============" << endl 
+        << " x - change paddle                               " << endl
         << "=================================================" << endl << endl;
 
    srand(time(0));

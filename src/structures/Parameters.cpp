@@ -25,9 +25,6 @@ Parameters::Parameters( ){
    pdl_moveStep = 0.1;
    pdl_timerStep = 17;  // ~60 Hz
 
-   // use the good paddle
-   pdl_high_quality_model = true;
-
    // in units/sec (mostly this is the to restrict the mouse movement to the
    // max speed of the paddle) negative value disables maximum (unwise)
    // 0.2 - easy

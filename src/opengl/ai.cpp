@@ -29,7 +29,7 @@ void aiTimer(int value)
 
    GLfloat move_dist = max(0.0001f,sqrt(movement.x*movement.x+movement.y*movement.y));
 
-   // normalize movement
+   // normalize movement (try to stabilize the paddle a bit)
    if ( move_dist > options.pdl1_maxVelocity )
       movement = movement / move_dist * options.pdl1_maxVelocity;
 
@@ -37,9 +37,12 @@ void aiTimer(int value)
    vec2 paddle_velocity = vec2(options.paddle1->get_velocity().x,options.paddle1->get_velocity().z);
    vec2 sum = movement + paddle_velocity;
 
+   if ( length(sum) < length(movement) && length(sum) < length(paddle_velocity) )
+      movement = vec2(0.0,0.0);
+
    // special case to help unstick puck down near goal
    static int stuck_frames;
-   if ( puck_pos.x < -3.31 && fabs(puck_velocity.x) < 0.05 )
+   if ( puck_pos.x < -3.31 && fabs(puck_pos.y) > 0.374856 && fabs(puck_velocity.x) < 0.05 )
    {
       stuck_frames++;
       if ( stuck_frames > 10 )
