@@ -217,6 +217,7 @@ void keyboardPress( unsigned char key, int x, int y ){
       /*    Quit Program    */
       /**********************/
       case 033: //escape key
+         options.scoreboard.win_count( options.p1_wins, options.p2_wins);
          exit( EXIT_SUCCESS );     
    }
 
