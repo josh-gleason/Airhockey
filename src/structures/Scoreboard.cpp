@@ -135,7 +135,7 @@ void Scoreboard::init( const GLuint& prog ){
    glBindVertexArrayAPPLE( vao );
    #else
    glGenVertexArrays(1, &vao);
-   glBindVertexArrayAPPLE( vao );
+   glBindVertexArray( vao );
    #endif
 
    // Create and initialize a buffer object
