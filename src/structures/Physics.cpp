@@ -120,9 +120,9 @@ void Physics_Model::init( vec3 const& boardSize, vec2 const& puckSize, vec2 cons
    paddle1Circle = new btCylinderShape(btVector3(btScalar(paddle1Size.x),btScalar(0.1),btScalar(paddle1Size.x)));
 
    // TODO
-   paddle1Triangle = new btCylinderShape(btVector3(btScalar(paddleSize.x),btScalar(0.1),btScalar(paddle1Size.x)));
+   //paddle1Triangle = new btCylinderShape(btVector3(btScalar(paddleSize.x),btScalar(0.1),btScalar(paddle1Size.x)));
 
-   paddle1Square = new btBoxShape(btVector3(btScalar(paddleSize.x), btScalar(0.1), btScalar(paddle1Size.x)));
+   //paddle1Square = new btBoxShape(btVector3(btScalar(paddleSize.x), btScalar(0.1), btScalar(paddle1Size.x)));
 
    paddle1Shape = paddle1Circle;
 

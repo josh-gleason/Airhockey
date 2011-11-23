@@ -115,7 +115,7 @@ void Parameters::set_paddle_shape( PaddleType shape )
       paddle1 = round1;
       paddle2 = round2;
 
-      paddle1Shape
+      //paddle1Shape
 
    } else if ( shape == TRIANGLE ) {
       paddle1 = tri1;
