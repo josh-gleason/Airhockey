@@ -52,7 +52,7 @@ void display_function( void )
    }
    else if( options.view_mode == 1 ){
       
-      glClearColor( 1.0, 1.0, 1.0, 1.0 );
+      glClearColor( 0.9, 0.4, 0.9, 1.0 );
       options.scoreboard.draw_shape();
 
 
