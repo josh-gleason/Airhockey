@@ -49,7 +49,8 @@ void display_function( void )
       options.paddle2->draw_shape( options.camera.getTransform(), options.projectionMatrix, options.light.m_position);
    }
    else if( options.view_mode == 1 ){
-
+      
+      glClearColor( 1.0, 1.0, 1.0, 1.0 );
       options.scoreboard.draw_shape();
 
 
