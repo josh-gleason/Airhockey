@@ -5,7 +5,7 @@ void display_function( void )
    string name;
    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-
+   cout << "view mode: " << options.view_mode << endl;
    if( options.view_mode == 0){
       glClearColor( 0.5, 0.5, 0.5, 1.0 );
       
@@ -59,7 +59,7 @@ void display_function( void )
 
    }
    else if( options.view_mode == 2 ){
-
+      cout << "inside winner" << endl;
       glClearColor( 1.0, 1.0, 1.0, 1.0);
       options.winner->draw_shape();
    }

@@ -229,10 +229,12 @@ void timerHandle( int state ){
             options.hud.p2_score(options.p2_score);
             if( options.p2_score > 3 ){
                options.view_mode = 2;
-               options.winner = new Winner;
-               options.winner->init( options.program, true);
                options.p1_score = 0;
                options.p2_score = 0;
+               options.p2_wins++;
+               options.hud.p2_win(options.p2_wins);
+               options.winner = new Winner;
+               options.winner->init( options.program, true);
             }
          }
          else if ( p1scored )
@@ -246,6 +248,8 @@ void timerHandle( int state ){
                options.view_mode = 2;
                options.p1_score = 0;
                options.p2_score = 0;
+               options.p1_wins++;
+               options.hud.p1_win(options.p1_wins);
                options.winner = new Winner;
                options.winner->init( options.program, false);
             }
