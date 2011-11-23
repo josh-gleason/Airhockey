@@ -188,12 +188,14 @@ void timerHandle( int state ){
             std::cout << "PLAYER 2 SCORED" << std::endl;
             options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3( 1.2, 0, 0)));
             options.p2_score++;
+            options.hud.p2_score(options.p2_score);
          }
          else if ( p1scored )
          {
             std::cout << "PLAYER 1 SCORED" << std::endl;
             options.physics.puckRigidBody->setWorldTransform(btTransform(btQuaternion(1,0,0,0),btVector3(-1.2, 0, 0)));
             options.p1_score++;
+            options.hud.p1_score(options.p1_score);
          }
          else if ( ob )
          {
