@@ -17,5 +17,7 @@ void display_function( );
 void init_menu();
 
 void processMenuEvents( int option );
+void processStateMenuEvents( int option );
+
 
 #endif

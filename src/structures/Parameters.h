@@ -76,7 +76,9 @@ class Parameters{
       
       /** Menu Object  */
       GLuint menu;
-   
+      GLuint shape_submenu;
+      GLuint state_submenu;
+
       /** Mouse is down command */
       bool mouse_down;
 
