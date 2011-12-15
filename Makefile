@@ -48,11 +48,7 @@ OBJECT_NAMES  = $(CORE)/parser \
                 $(OPENGL)/timer \
                 $(OPENGL)/reshape \
                 $(OPENGL)/ai \
-                $(MODELLOADER)/list \
-                $(MODELLOADER)/string_extra \
-                $(MODELLOADER)/obj_parser \
-                $(MODELLOADER)/print_data \
-                $(MODELLOADER)/objLoader
+                $(MODELLOADER)/assimp_utilities
 
 ######################### SETTINGS VARIABLES ###################################
 
@@ -69,6 +65,8 @@ ifeq ($(shell uname),Linux)
   OPENGL_INCLUDE =
   BULLET_INCLUDE = `pkg-config bullet --cflags`
   BULLET_LIBS    = -L/home/ee/gleason/local/lib `pkg-config bullet --libs`
+  ASSIMP_INCLUDE = `pkg-config assimp --cflags`
+  ASSIMP_LIBS    = -L/home/ee/gleason/local/lib `pkg-config assimp --libs`
 else  # Apple
   BOOST_LIBS     = -L/opt/local/lib -lboost_system -lboost_filesystem \
                    -lboost_program_options
@@ -77,10 +75,12 @@ else  # Apple
   OPENGL_INCLUDE =
   BULLET_INCLUDE = -I/opt/local/include/bullet
   BULLET_LIBS    = -L/opt/local/lib -lLinearMath -lBulletCollision -lBulletDynamics
+  ASSIMP_INCLUDE = -I/opt/local/include/assimp
+  ASSIMP_LIBS    = -L/opt/local/lib -lassimp
 endif
 
-LIBS          = $(OPENGL_LIBS) $(BOOST_LIBS) $(BULLET_LIBS)
-XTRA_INCLUDE  = $(OPENGL_INCLUDE) $(BOOST_INCLUDE) $(BULLET_INCLUDE)
+LIBS          = $(OPENGL_LIBS) $(BOOST_LIBS) $(BULLET_LIBS) $(ASSIMP_LIBS)
+XTRA_INCLUDE  = $(OPENGL_INCLUDE) $(BOOST_INCLUDE) $(BULLET_INCLUDE) $(ASSIMP_INCLUDE)
 FLAGS         = -g -Wall
 
 CC            = g++

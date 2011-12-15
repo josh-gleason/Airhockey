@@ -24,10 +24,6 @@
 // structures/
 #include "Parameters.h"
 
-// model_loader/
-#include "objLoader.h"
-#include "print_data.h"
-
 // bullet physics engine
 #include <btBulletDynamicsCommon.h>
 
